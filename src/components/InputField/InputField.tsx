@@ -1,14 +1,19 @@
-import React from "react"
-import { Plus,Search,Calendar } from "lucide-react";
+import React, { useState } from "react"
+import { Plus,Search } from "lucide-react";
+import { CalendarDays } from "lucide-react";
 import { Tabs,TabsList,TabsTrigger } from "../ui/tabs";
 import { useAppDispatch,useAppSelector } from "@/redux/hook";
 import { setInput,setTag } from "@/redux/reducer/CounterSlice";
+import { Calendar } from "../ui/calendar";
 
 const InputField: React.FC = () =>{
 
     const input = useAppSelector((state) => state.input.description)
     const tag = useAppSelector((state) => state.input.tag)
     const dispatch = useAppDispatch()
+
+    const [showCalendar,setShowCalendar] = useState<boolean>(false)
+    const [date,setDate] = useState<Date | undefined>(new Date())
 
 
     const handleDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,10 +24,18 @@ const InputField: React.FC = () =>{
         dispatch(setTag(e.target.value))
     }
 
+    const handleShowCalendar = ()=> {
+        setShowCalendar(!showCalendar)
+    }
 
+    const handleChangeDate=(dat:Date | undefined)=>{
+        if(dat){
+            setDate(dat)
+        }
+    }
 
     return (
-        <div className="w-1/4 flex flex-col justify-center items-center gap-3">
+        <div className="w-1/4 flex flex-col justify-center items-center gap-3 relative">
             <div className="w-full relative">
                 <input type="text" placeholder="Rechercher une tâche..." className="w-full  font-josefin py-1 px-2 border-gray-300 border rounded-md outline-none focus:border-zinc-800" />
                 <Search className="absolute right-1 top-1 cursor-pointer hover:scale-95 transition-all duration-150"/>
@@ -40,9 +53,18 @@ const InputField: React.FC = () =>{
                    value={input}
                    onChange={handleDescription}
                    />
-            <button className="flex font-josefin justify-center items-center font-semibold border-2 border-gray-200 bg-gray-100 rounded-md w-full py-1">
-                <Calendar/>Date déchéances
+            <button className="flex font-josefin justify-center items-center font-semibold border-2 border-gray-200 
+                            bg-gray-100 hover:bg-gray-300 transition-all duration-200 ease-in-out rounded-md w-full py-1"
+                    onClick={()=>{handleShowCalendar()}}        
+            >
+                <CalendarDays/>Date déchéances
             </button>
+            {showCalendar && 
+            <Calendar mode="single" 
+                      className="absolute top-48 bg-gray-100 rounded"
+                      selected={date}
+                      onSelect={handleChangeDate}
+                      />}
             <input type="text" 
                    placeholder="Tags(Séparés par des virgules)" 
                    className="w-full font-josefin py-1 px-2 border-gray-200 border rounded-md 
