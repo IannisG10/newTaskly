@@ -2,17 +2,23 @@ import React from "react"
 import { Plus,Search,Calendar } from "lucide-react";
 import { Tabs,TabsList,TabsTrigger } from "../ui/tabs";
 import { useAppDispatch,useAppSelector } from "@/redux/hook";
-import { setInput } from "@/redux/reducer/CounterSlice";
+import { setInput,setTag } from "@/redux/reducer/CounterSlice";
 
 const InputField: React.FC = () =>{
 
-    const input = useAppSelector((state) => state.input.value)
+    const input = useAppSelector((state) => state.input.description)
+    const tag = useAppSelector((state) => state.input.tag)
     const dispatch = useAppDispatch()
 
 
-    const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(setInput(e.target.value))
     }
+
+    const handleTag = (e: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(setTag(e.target.value))
+    }
+
 
 
     return (
@@ -32,18 +38,25 @@ const InputField: React.FC = () =>{
                    className="w-full font-josefin py-1 px-2 border-gray-200 border rounded-md 
                    outline-none focus:border-zinc-800" 
                    value={input}
-                   onChange={handleInput}
+                   onChange={handleDescription}
                    />
             <button className="flex font-josefin justify-center items-center font-semibold border-2 border-gray-200 bg-gray-100 rounded-md w-full py-1">
                 <Calendar/>Date déchéances
             </button>
-            <input type="text" placeholder="Tags(Séparés par des virgules)" className="w-full font-josefin py-1 px-2 border-gray-200 border rounded-md outline-none focus:border-zinc-800" />
+            <input type="text" 
+                   placeholder="Tags(Séparés par des virgules)" 
+                   className="w-full font-josefin py-1 px-2 border-gray-200 border rounded-md 
+                   outline-none focus:border-zinc-800" 
+                   value={tag}
+                   onChange={handleTag}
+                   />
             <button className="flex font-josefin justify-center items-center text-white font-medium 
                     border-none bg-zinc-950 w-full rounded-md py-1"  
             >
                 <Plus/> Ajouter 
             </button>
             <span>Description:{input}</span>
+            <span>Tag:{tag}</span>
             
         </div>
     )

@@ -4,11 +4,13 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 // Creer une interrface pour typer l'etatt(string dans notre cas)
 interface stateType {
-    value: string;
+    description: string;
+    tag: string;
 }
 // Attrbuer le type à l'etat initial
 const initialState: stateType = {
-    value: ''
+    description: '',
+    tag: ''
 }
 
 const inputReducer = createSlice({
@@ -17,7 +19,10 @@ const inputReducer = createSlice({
     reducers:{
         //Une action
         setInput: (state,action: PayloadAction<string>)=>{
-            state.value = action.payload
+            state.description = action.payload
+        },
+        setTag: (state,action: PayloadAction<string>) => {
+            state.tag = action.payload
         }
     }
 })
@@ -25,5 +30,5 @@ const inputReducer = createSlice({
 //exporter le reducer 
 export default inputReducer.reducer
 //exporter les actions
-export const {setInput} = inputReducer.actions
+export const {setInput,setTag} = inputReducer.actions
 
