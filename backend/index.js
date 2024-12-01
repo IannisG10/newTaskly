@@ -26,10 +26,11 @@ app.get("/",(req,res)=>{
 
 app.post("/task",(req,res) => {
     const { desc,tags } = req.body
+    const data = req.body
     try{
         console.log("Données reçu du front : ",data)
-        const test = new data_model({description: desc, tag: tags})
-        test.save()
+        // const test = new data_model({description: desc, tag: tags})
+        // test.save()
         res.status(201).json(data)
     }catch(err){
         console.error("Probleme de reception des données")
