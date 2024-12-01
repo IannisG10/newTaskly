@@ -2,26 +2,39 @@ import React, { useState } from "react"
 import { Plus,Search } from "lucide-react";
 import { CalendarDays } from "lucide-react";
 import { Tabs,TabsList,TabsTrigger } from "../ui/tabs";
-import { useAppDispatch,useAppSelector } from "@/redux/hook";
-import { setInput,setTag } from "@/redux/reducer/CounterSlice";
+// import { useAppDispatch,useAppSelector } from "@/redux/hook";
+// import { setInput,setTag } from "@/redux/reducer/CounterSlice";
 import { Calendar } from "../ui/calendar";
 
 const InputField: React.FC = () =>{
 
-    const input = useAppSelector((state) => state.input.description)
-    const tag = useAppSelector((state) => state.input.tag)
-    const dispatch = useAppDispatch()
+    //const input = useAppSelector((state) => state.input.description)
+    //const tag = useAppSelector((state) => state.input.tag)
+    //const dispatch = useAppDispatch()
 
+
+    
+
+    const [description,setDescription] = useState<string>("")
+    const [tag,setTag] = useState<string>("")
     const [showCalendar,setShowCalendar] = useState<boolean>(false)
     const [date,setDate] = useState<Date | undefined>(new Date())
 
 
-    const handleDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setInput(e.target.value))
+    // const handleDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     dispatch(setInput(e.target.value))
+    // }
+
+    // const handleTag = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     dispatch(setTag(e.target.value))
+    // }
+
+    const handleDescription = (e: React.ChangeEvent<HTMLInputElement>)=>{
+        setDescription(e.target.value)
     }
 
     const handleTag = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setTag(e.target.value))
+        setTag(e.target.value)
     }
 
     const handleShowCalendar = ()=> {
@@ -33,6 +46,21 @@ const InputField: React.FC = () =>{
             setDate(dat)
         }
     }
+
+    const fetchData = ()=>{
+        fetch("https://newtaskly.onrender.com/task",{
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                desc: description,
+                tags: tag
+            })
+        })
+    }
+
+
 
     return (
         <div className="w-1/4 flex flex-col justify-center items-center gap-3 relative">
@@ -50,7 +78,7 @@ const InputField: React.FC = () =>{
                    placeholder="Titre de la tâche" 
                    className="w-full font-josefin py-1 px-2 border-gray-200 border rounded-md 
                    outline-none focus:border-zinc-800" 
-                   value={input}
+                   value={description}
                    onChange={handleDescription}
                    />
             <button className="flex font-josefin justify-center items-center font-semibold border-2 border-gray-200 
@@ -74,11 +102,12 @@ const InputField: React.FC = () =>{
                    />
             <button className="flex font-josefin justify-center items-center text-white font-medium 
                     border-none bg-zinc-950 w-full rounded-md py-1"  
+                    onClick={fetchData}
             >
                 <Plus/> Ajouter 
             </button>
-            <span>Description:{input}</span>
-            <span>Tag:{tag}</span>
+            
+            
             
         </div>
     )

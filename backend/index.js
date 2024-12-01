@@ -12,6 +12,16 @@ app.get("/",(req,res)=>{
     res.send("Serveur démarré sur le port 3050")
 })
 
+app.post("/task",(req,res) => {
+    const data = req.body
+    try{
+        console.log("Données reçu du front : ",data)
+        res.status(201).json(data)
+    }catch(err){
+        console.error("Probleme de reception des données")
+    }
+})
+
 app.listen(PORT,()=>{
     try{
         console.log(`Serveur en écoute sur le port ${PORT}`)
