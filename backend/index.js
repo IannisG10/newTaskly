@@ -9,7 +9,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-mongoose.connect("mongodb+srv://guerraiannis:newTaskly10@cluster0.ze19o.mongodb.net/newTaskly?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.connect("mongodb+srv://guerraiannis:newTaskly10@cluster0.ze19o.mongodb.net/taskManager?retryWrites=true&w=majority&appName=Cluster0")
         .then(()=>{
             console.log("Connexion à la base de donnée a bien été établie")
         })
