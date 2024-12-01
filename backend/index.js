@@ -34,7 +34,9 @@ app.post("/task", async (req,res) => {
             tag: tags
         })
          const saveTest = await test.save()
-        res.status(201).json({message:"Tache bien envoyé"})
+         console.log("Donnée envoyé dans la BD")
+
+        res.status(201).json({message:"Tache bien envoyé",test: saveTest})
     }catch(err){
         console.error("Probleme de reception des données")
     }
