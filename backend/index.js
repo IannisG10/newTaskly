@@ -24,6 +24,15 @@ app.get("/",(req,res)=>{
     res.send("Serveur démarré sur le port 3050")
 })
 
+app.get("/task", async (req,res) => {
+    try{
+        const myTest = await model.find()
+        res.json(myTest)
+        
+    }catch(err){
+        console.error("Une erreur s'est produite lors de la recuperation des données")
+    }
+})
 app.post("/task", async (req,res) => {
     const { desc,tags } = req.body
     //const data = req.body

@@ -1,10 +1,15 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Plus,Search } from "lucide-react";
 import { CalendarDays } from "lucide-react";
 import { Tabs,TabsList,TabsTrigger } from "../ui/tabs";
 // import { useAppDispatch,useAppSelector } from "@/redux/hook";
 // import { setInput,setTag } from "@/redux/reducer/CounterSlice";
 import { Calendar } from "../ui/calendar";
+
+interface typeDataTest {
+    desc: string;
+    tags: string
+}
 
 const InputField: React.FC = () =>{
 
@@ -20,6 +25,7 @@ const InputField: React.FC = () =>{
     const [showCalendar,setShowCalendar] = useState<boolean>(false)
     const [date,setDate] = useState<Date | undefined>(new Date())
 
+    const [testData,setTestData] = useState<typeDataTest[]>([])
 
     // const handleDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
     //     dispatch(setInput(e.target.value))
@@ -47,6 +53,8 @@ const InputField: React.FC = () =>{
         }
     }
 
+    
+
     const fetchData = ()=>{
         fetch("https://newtaskly.onrender.com/task",{
             method: 'POST',
@@ -57,8 +65,22 @@ const InputField: React.FC = () =>{
                 desc: description,
                 tags: tag
             })
+        }).then(res => res.json())
+        .then(data => console.log("Data from the client : ",data))
+        .catch((err)=>{
+            console.error("Probleme d'envoie de données venant du client",err)
         })
     }
+
+    useEffect(()=>{
+        fetch("https://newtaskly.onrender.com/task")
+        .then(res => res.json())
+        .then((data) => {
+           setTestData(data)
+        }).catch((err) => {
+            console.error("Erreur de reçeption des données depuis la BD",err)
+        })
+    },[])
 
 
 
@@ -106,6 +128,14 @@ const InputField: React.FC = () =>{
             >
                 <Plus/> Ajouter 
             </button>
+
+            <h1 className="font-bold text-2xl">
+                Voici les données recupéres : {
+                    testData.map((item,index) => (
+                        <span key={index}>{item.desc} et {item.tags}</span>
+                    ))
+                }
+            </h1>
             
             
             
