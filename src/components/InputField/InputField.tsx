@@ -6,6 +6,7 @@ import { Tabs,TabsList,TabsTrigger } from "../ui/tabs";
 // import { setInput,setTag } from "@/redux/reducer/CounterSlice";
 import { Calendar } from "../ui/calendar";
 
+
 interface typeDataTest {
     desc: string;
     tags: string
@@ -76,6 +77,7 @@ const InputField: React.FC = () =>{
         fetch("https://newtaskly.onrender.com/task")
         .then(res => res.json())
         .then((data) => {
+            console.log("Données reçu de l'API : ",data)
            setTestData(data)
         }).catch((err) => {
             console.error("Erreur de reçeption des données depuis la BD",err)
@@ -130,10 +132,13 @@ const InputField: React.FC = () =>{
             </button>
 
             <h1 className="font-bold text-2xl">
-                Voici les données recupéres : {
-                    testData.map((item,index) => (
-                        <span key={index}>{item.desc} et {item.tags}</span>
-                    ))
+                {testData.length > 0 ?
+                    testData.map((item,index) =>(
+                        <span key={index}>
+                            {item.desc} {item.tags}
+                        </span>
+                    )) : 
+                    <div>Aucunes données à afficher</div>
                 }
             </h1>
             
