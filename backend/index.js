@@ -2,6 +2,8 @@ const express = require("express")
 const cors = require("cors")
 const mongoose = require("mongoose")
 
+const data_model = require("./models/data")
+
 const app = express()
 // Initialisé les middleware
 app.use(express.json())
@@ -22,9 +24,11 @@ app.get("/",(req,res)=>{
 })
 
 app.post("/task",(req,res) => {
-    const data = req.body
+    const { desc,tags } = req.body
     try{
         console.log("Données reçu du front : ",data)
+        const test = new data_model({description: desc, tag: tags})
+        test.save()
         res.status(201).json(data)
     }catch(err){
         console.error("Probleme de reception des données")
