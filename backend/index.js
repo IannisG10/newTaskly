@@ -24,7 +24,7 @@ app.get("/",(req,res)=>{
     res.send("Serveur démarré sur le port 3050")
 })
 
-app.post("/task",(req,res) => {
+app.post("/task", async (req,res) => {
     const { desc,tags } = req.body
     //const data = req.body
     try{
@@ -33,8 +33,8 @@ app.post("/task",(req,res) => {
             description: desc,
             tag: tags
         })
-         test.save()
-        res.status(201).json(data)
+         const saveTest = await test.save()
+        res.status(201).json({message:"Tache bien envoyé"})
     }catch(err){
         console.error("Probleme de reception des données")
     }
