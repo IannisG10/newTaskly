@@ -40,7 +40,7 @@ app.post("/task", async (req,res) => {
         console.log("Données reçu du front : ",req.body)
          const test = new model({
             desc: desc,
-            tag: tags
+            tags: tags
         })
          const saveTest = await test.save()
          console.log("Donnée envoyé dans la BD")

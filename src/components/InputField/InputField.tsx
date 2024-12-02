@@ -137,7 +137,7 @@ const InputField: React.FC = () =>{
 
            
            {dataTest.map((item,index) => (
-                <span className="text-black" key={index}>{item.desc}</span>
+                <span className="text-black" key={index}>{item.desc} & {item.tags}</span>
            ))}
         </div>
     )

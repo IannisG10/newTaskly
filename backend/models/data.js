@@ -4,7 +4,7 @@ const mongoose = require("mongoose")
 
 const dataSchema = new mongoose.Schema({
     desc: String,
-    tag: String
+    tags: String
 })
 
 const dataModel = mongoose.model("datatest",dataSchema)
