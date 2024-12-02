@@ -25,8 +25,9 @@ const InputField: React.FC = () =>{
     const [tag,setTag] = useState<string>("")
     const [showCalendar,setShowCalendar] = useState<boolean>(false)
     const [date,setDate] = useState<Date | undefined>(new Date())
+    const [dataTest,setDataTest] = useState<typeDataTest[]>([])
 
-    const [testData,setTestData] = useState<typeDataTest[]>([])
+    
 
     // const handleDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
     //     dispatch(setInput(e.target.value))
@@ -78,14 +79,16 @@ const InputField: React.FC = () =>{
         .then(res => res.json())
         .then((data) => {
             console.log("Données reçu de l'API : ",data)
-           setTestData(data)
+            setDataTest(data)
+            console.log(dataTest)
         }).catch((err) => {
             console.error("Erreur de reçeption des données depuis la BD",err)
         })
     },[])
 
+    
 
-
+    
     return (
         <div className="w-1/4 flex flex-col justify-center items-center gap-3 relative">
             <div className="w-full relative">
@@ -130,20 +133,12 @@ const InputField: React.FC = () =>{
             >
                 <Plus/> Ajouter 
             </button>
+            
 
-            <h1 className="font-bold text-2xl">
-                {testData.length > 0 ?
-                    testData.map((item,index) =>(
-                        <span key={index}>
-                            {item.desc} {item.tags}
-                        </span>
-                    )) : 
-                    <div>Aucunes données à afficher</div>
-                }
-            </h1>
-            
-            
-            
+           
+           {dataTest.map((item,index) => (
+                <span className="text-black" key={index}>{item.desc}</span>
+           ))}
         </div>
     )
 }
