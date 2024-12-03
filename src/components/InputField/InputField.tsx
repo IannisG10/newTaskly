@@ -83,25 +83,25 @@ const InputField: React.FC = () =>{
     },[])
  
     return (
-        <div className="w-1/4 flex flex-col justify-center items-center gap-3 relative">
+        <div className="md:w-1/4 w-5/6 flex flex-col justify-center items-center gap-3 relative">
             <div className="w-full relative">
-                <input type="text" placeholder="Rechercher une tâche..." className="w-full  font-josefin py-1 px-2 border-gray-300 border rounded-md outline-none focus:border-zinc-800" />
+                <input type="text" placeholder="Rechercher une tâche..." className="w-full md:text-base text-sm  font-josefin py-1 px-2 border-gray-300 border rounded-md outline-none focus:border-zinc-800" />
                 <Search className="absolute right-1 top-1 cursor-pointer hover:scale-95 transition-all duration-150"/>
             </div>
             <Tabs className="w-full" defaultValue="toutes">
-                <TabsList className="w-full grid grid-cols-2 shadow-inner">
-                    <TabsTrigger value="toutes">Toutes</TabsTrigger>
-                    <TabsTrigger value="aujourdhui">Aujourd'hui</TabsTrigger>
+                <TabsList className="w-full grid grid-cols-2 shadow-inner h-8 ">
+                    <TabsTrigger value="toutes" className="h-6">Toutes</TabsTrigger>
+                    <TabsTrigger value="aujourdhui" className="h-6">Aujourd'hui</TabsTrigger>
                 </TabsList>
             </Tabs>
             <input type="text" 
                    placeholder="Titre de la tâche" 
-                   className="w-full font-josefin py-1 px-2 border-gray-200 border rounded-md 
+                   className="w-full font-josefin py-1 px-2 md:text-base text-sm border-gray-200 border rounded-md 
                    outline-none focus:border-zinc-800" 
                    value={description}
                    onChange={handleDescription}
                    />
-            <button className="flex font-josefin justify-center items-center font-semibold border-2 border-gray-200 
+            <button className="flex font-josefin justify-center md:text-base text-sm items-center font-semibold border-2 border-gray-200 
                             bg-gray-100 hover:bg-gray-300 transition-all duration-200 ease-in-out rounded-md w-full py-1"
                     onClick={()=>{handleShowCalendar()}}        
             >
@@ -115,7 +115,7 @@ const InputField: React.FC = () =>{
                       />}
             <input type="text" 
                    placeholder="Tags(Séparés par des virgules)" 
-                   className="w-full font-josefin py-1 px-2 border-gray-200 border rounded-md 
+                   className="w-full font-josefin py-1 px-2 md:text-base text-sm border-gray-200 border rounded-md 
                    outline-none focus:border-zinc-800" 
                    value={tag}
                    onChange={handleTag}
