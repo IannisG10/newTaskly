@@ -5,11 +5,12 @@ import { Tabs,TabsList,TabsTrigger } from "../ui/tabs";
 import { useAppDispatch,useAppSelector } from "@/redux/hook";
 import { setData } from "@/redux/reducer/CounterSlice";
 import { Calendar } from "../ui/calendar";
-interface datatype {
-    _id: number;
-    desc: string;
-    tags: string;
-}
+
+// interface datatype {
+//     _id: number;
+//     desc: string;
+//     tags: string;
+// }
 
 const InputField: React.FC = () =>{
 
@@ -21,7 +22,7 @@ const InputField: React.FC = () =>{
     const [tag,setTag] = useState<string>("")
     const [showCalendar,setShowCalendar] = useState<boolean>(false)
     const [date,setDate] = useState<Date | undefined>(new Date())
-    const [dataTest,setDataTest] = useState<datatype[]>([])
+    // const [dataTest,setDataTest] = useState<datatype[]>([])
 
     const datas = useAppSelector((state) => state.data.data)
     const dispatch = useAppDispatch()
