@@ -50,7 +50,8 @@ const InputField: React.FC = () =>{
         const newTask = {
             _id: Date.now(),
             desc: description,
-            tags: tag
+            tags: tag,
+            date: date?.toLocaleDateString()
         }
         fetch("https://newtaskly.onrender.com/task",{
             method: 'POST',

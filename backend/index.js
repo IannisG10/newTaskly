@@ -34,14 +34,15 @@ app.get("/task", async (req,res) => {
     }
 })
 app.post("/task", async (req,res) => {
-    const { _id,desc,tags } = req.body
+    const { _id,desc,tags,date } = req.body
     //const data = req.body
     try{
         console.log("Données reçu du front : ",req.body)
          const test = new model({
             _id: _id,
             desc: desc,
-            tags: tags
+            tags: tags,
+            date: date
         })
          const saveTest = await test.save()
          console.log("Donnée envoyé dans la BD")

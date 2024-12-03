@@ -5,6 +5,7 @@ interface DataType {
     _id: number;
     desc: string;
     tags: string;
+    date: string;
 }
 interface DataState {
     data: DataType[];

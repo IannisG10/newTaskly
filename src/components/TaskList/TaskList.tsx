@@ -8,10 +8,14 @@ const TaskList: React.FC = ()=> {
         <div className="flex flex-col gap-5 w-1/4 my-4">
             {datas.map((item,index) => (
                 <div key={index}
-                     className="flex justify-center border border-gray-100 items-center  p-4 rounded-md shadow"
+                     className="flex flex-col border border-gray-100  p-4 rounded-md shadow"
                 >
-                    {item.desc}
-                    {item.tags}
+                    <div>
+                        {item.desc}
+                    </div>
+                    <div>
+                        {item.tags}
+                    </div>
 
                 </div>
             ))}
