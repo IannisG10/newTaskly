@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import inputReducer from "../reducer/CounterSlice"
+import DataReducer from '../reducer/CounterSlice'
 
 //1.Configurer le store qui va contenir l'etat global de l'application
 const store = configureStore({
     reducer: {
-        input: inputReducer
+        data: DataReducer
     }
 })
 

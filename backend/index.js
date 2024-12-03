@@ -34,11 +34,12 @@ app.get("/task", async (req,res) => {
     }
 })
 app.post("/task", async (req,res) => {
-    const { desc,tags } = req.body
+    const { id,desc,tags } = req.body
     //const data = req.body
     try{
         console.log("Données reçu du front : ",req.body)
          const test = new model({
+            _id: id,
             desc: desc,
             tags: tags
         })

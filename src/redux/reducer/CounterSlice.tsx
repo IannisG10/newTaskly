@@ -1,34 +1,27 @@
-//3.Créer un slice qui va contenir les reducers et les actions
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit/react";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-// Creer une interrface pour typer l'etatt(string dans notre cas)
-interface stateType {
-    description: string;
-    tag: string;
+interface DataType {
+    _id: number;
+    desc: string;
+    tags: string;
 }
-// Attrbuer le type à l'etat initial
-const initialState: stateType = {
-    description: '',
-    tag: ''
+interface DataState {
+    data: DataType[];
+}
+const initialState = {
+    data: []
 }
 
-const inputReducer = createSlice({
-    name:"input",
+const dataSlice = createSlice({
+    name: "data",
     initialState,
-    reducers:{
-        //Une action
-        setInput: (state,action: PayloadAction<string>)=>{
-            state.description = action.payload
+    reducers: {
+        setData: (state,action: PayloadAction<any>) => {
+            state.data = action.payload
         },
-        setTag: (state,action: PayloadAction<string>) => {
-            state.tag = action.payload
-        }
-    }
-})
+    },
+});
 
-//exporter le reducer 
-export default inputReducer.reducer
-//exporter les actions
-export const {setInput,setTag} = inputReducer.actions
-
+export default dataSlice.reducer;
+export const {setData} = dataSlice.actions

@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react"
 import { Plus,Search } from "lucide-react";
 import { CalendarDays } from "lucide-react";
 import { Tabs,TabsList,TabsTrigger } from "../ui/tabs";
-// import { useAppDispatch,useAppSelector } from "@/redux/hook";
-// import { setInput,setTag } from "@/redux/reducer/CounterSlice";
+import { useAppDispatch,useAppSelector } from "@/redux/hook";
+import { setData } from "@/redux/reducer/CounterSlice";
 import { Calendar } from "../ui/calendar";
-
-
-interface typeDataTest {
+interface datatype {
+    _id: number;
     desc: string;
-    tags: string
+    tags: string;
 }
 
 const InputField: React.FC = () =>{
@@ -18,25 +17,16 @@ const InputField: React.FC = () =>{
     //const tag = useAppSelector((state) => state.input.tag)
     //const dispatch = useAppDispatch()
 
-
-    
-
     const [description,setDescription] = useState<string>("")
     const [tag,setTag] = useState<string>("")
     const [showCalendar,setShowCalendar] = useState<boolean>(false)
     const [date,setDate] = useState<Date | undefined>(new Date())
-    const [dataTest,setDataTest] = useState<typeDataTest[]>([])
+    const [dataTest,setDataTest] = useState<datatype[]>([])
+
+    const datas = useAppSelector((state) => state.data.data)
+    const dispatch = useAppDispatch()
 
     
-
-    // const handleDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     dispatch(setInput(e.target.value))
-    // }
-
-    // const handleTag = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     dispatch(setTag(e.target.value))
-    // }
-
     const handleDescription = (e: React.ChangeEvent<HTMLInputElement>)=>{
         setDescription(e.target.value)
     }
@@ -55,23 +45,25 @@ const InputField: React.FC = () =>{
         }
     }
 
-    
-
     const fetchData = ()=>{
+        const newTask = {
+            _id: Date.now(),
+            desc: description,
+            tags: tag
+        }
         fetch("https://newtaskly.onrender.com/task",{
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                desc: description,
-                tags: tag
-            })
+            body: JSON.stringify(newTask)
         }).then(res => res.json())
         .then(data => console.log("Data from the client : ",data))
         .catch((err)=>{
             console.error("Probleme d'envoie de données venant du client",err)
         })
+        setDescription("")
+        setTag("")
     }
 
     useEffect(()=>{
@@ -79,16 +71,15 @@ const InputField: React.FC = () =>{
         .then(res => res.json())
         .then((data) => {
             console.log("Données reçu de l'API : ",data)
-            setDataTest(data)
-            console.log(dataTest)
+            //setDataTest(data)
+            dispatch(setData(data))
+            console.log(datas)
+            //console.log(dataTest)
         }).catch((err) => {
             console.error("Erreur de reçeption des données depuis la BD",err)
         })
-    },[])
-
-    
-
-    
+    },[dispatch])
+ 
     return (
         <div className="w-1/4 flex flex-col justify-center items-center gap-3 relative">
             <div className="w-full relative">
@@ -133,11 +124,9 @@ const InputField: React.FC = () =>{
             >
                 <Plus/> Ajouter 
             </button>
-            
-
-           
-           {dataTest.map((item,index) => (
-                <span className="text-black" key={index}>{item.desc} & {item.tags}</span>
+             
+           {datas.map((item,index) => (
+            <p key={index}>{item.desc}</p>
            ))}
         </div>
     )
