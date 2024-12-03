@@ -9,7 +9,7 @@ interface DataType {
 interface DataState {
     data: DataType[];
 }
-const initialState = {
+const initialState: DataState = {
     data: []
 }
 
