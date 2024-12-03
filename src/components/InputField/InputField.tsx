@@ -126,9 +126,6 @@ const InputField: React.FC = () =>{
                 <Plus/> Ajouter 
             </button>
              
-           {datas.map((item,index) => (
-            <p key={index}>{item.desc}</p>
-           ))}
         </div>
     )
 }
