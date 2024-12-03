@@ -16,6 +16,9 @@ const TaskList: React.FC = ()=> {
                     <div>
                         {item.tags}
                     </div>
+                    <div className=" border-2 border-gray-200 rounded bg-gray-100">
+                        {item.date}
+                    </div>
 
                 </div>
             ))}
