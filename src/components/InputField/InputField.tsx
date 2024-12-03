@@ -79,7 +79,7 @@ const InputField: React.FC = () =>{
         }).catch((err) => {
             console.error("Erreur de reçeption des données depuis la BD",err)
         })
-    },[dispatch])
+    },[])
  
     return (
         <div className="w-1/4 flex flex-col justify-center items-center gap-3 relative">
