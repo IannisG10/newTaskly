@@ -6,11 +6,6 @@ import { useAppDispatch,useAppSelector } from "@/redux/hook";
 import { setData } from "@/redux/reducer/CounterSlice";
 import { Calendar } from "../ui/calendar";
 
-// interface datatype {
-//     _id: number;
-//     desc: string;
-//     tags: string;
-// }
 
 const InputField: React.FC = () =>{
 
@@ -51,7 +46,8 @@ const InputField: React.FC = () =>{
             _id: Date.now(),
             desc: description,
             tags: tag,
-            date: date?.toLocaleDateString()
+            date: date?.toLocaleDateString(),
+            isCheck: false
         }
         fetch("https://newtaskly.onrender.com/task",{
             method: 'POST',
@@ -67,6 +63,8 @@ const InputField: React.FC = () =>{
         setDescription("")
         setTag("")
     }
+
+    
 
     useEffect(()=>{
         fetch("https://newtaskly.onrender.com/task")

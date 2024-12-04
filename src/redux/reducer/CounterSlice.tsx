@@ -6,6 +6,7 @@ interface DataType {
     desc: string;
     tags: string;
     date: string;
+    isCheck: boolean;
 }
 interface DataState {
     data: DataType[];
@@ -21,8 +22,11 @@ const dataSlice = createSlice({
         setData: (state,action: PayloadAction<any>) => {
             state.data = action.payload
         },
+        toggleDataCheck: (state,action: PayloadAction<number>) => {
+            state.data.map((item) => item._id === action.payload ? {...item, isCheck: !item.isCheck} : item)
+        }
     },
 });
 
 export default dataSlice.reducer;
-export const {setData} = dataSlice.actions
+export const { setData,toggleDataCheck } = dataSlice.actions

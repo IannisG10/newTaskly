@@ -1,16 +1,20 @@
-import React, { useState } from "react";
-import { useAppSelector } from "@/redux/hook";
+import React from "react";
+import { useAppSelector,useAppDispatch } from "@/redux/hook";
 import { Trash2,Clock } from "lucide-react";
 import { Checkbox } from "../ui/checkbox";
+import { toggleDataCheck } from "@/redux/reducer/CounterSlice";
+
 
 const TaskList: React.FC = ()=> {
 
-    const [isChecked,setisChecked] = useState<boolean>(false);
+    const datas = useAppSelector((state) => state.data.data);
+    const dispatch = useAppDispatch();
 
-    const handleChecked = () => {
-        setisChecked(!isChecked)
+    const toggleData = (id: number)=>{
+        dispatch(toggleDataCheck(id));
+        console.log("Voici l'id de l'element selectionné : ",id);
     }
-    const datas = useAppSelector((state) => state.data.data)
+
     return(
         <div className="flex flex-col gap-5 md:w-1/4 w-5/6 my-4">
             {datas.map((item,index) => (
@@ -18,13 +22,12 @@ const TaskList: React.FC = ()=> {
                      className="flex flex-col border gap-1 border-gray-100  p-2 rounded-md shadow"
                 >
                     <div className="flex justify-start gap-0.5 items-center font-josefin md:text-lg text-sm">
-                        <Checkbox checked={isChecked}
-                            onCheckedChange={handleChecked}
+                        <Checkbox checked={item.isCheck}
+                            onCheckedChange={()=>{toggleData(item._id)}}
                         />
                         {
-                            isChecked ? <div><s>{item.desc}</s></div> : <div>{item.desc}</div>
-                        }
-                       
+                            item.isCheck ? <div><s>{item.desc}</s></div> : <div>{item.desc}</div>
+                        }  
                     </div>
                     <div className="flex justify-start font-josefin items-center bg-gray-400 rounded-lg p-1 text-xs w-fit font-bold">
                         {item.tags}

@@ -33,8 +33,27 @@ app.get("/task", async (req,res) => {
         console.error("Une erreur s'est produite lors de la recuperation des données")
     }
 })
+
+app.patch("/task/:id", async(req,res) => {
+    const { id } = req.params
+    const updateData = req.body
+
+    try{
+        const data = await model.findByIdAndUpdate(id,updateData,{
+            new: true
+        })
+        console.log(data)
+        res.status(200).json({message: 'Une tache mis à jour ',update: data})
+        res.json(data)
+
+    }catch(err){
+        console.error("Erreur de mise à jour de la data",err)
+        res.status(400).json({message: 'Erreur lors de la mis à jour ',erreur: err})
+    }
+})
+
 app.post("/task", async (req,res) => {
-    const { _id,desc,tags,date } = req.body
+    const { _id,desc,tags,date,isCheck } = req.body
     //const data = req.body
     try{
         console.log("Données reçu du front : ",req.body)
@@ -42,7 +61,8 @@ app.post("/task", async (req,res) => {
             _id: _id,
             desc: desc,
             tags: tags,
-            date: date
+            date: date,
+            isCheck: isCheck
         })
          const saveTest = await test.save()
          console.log("Donnée envoyé dans la BD")
