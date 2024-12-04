@@ -4,14 +4,31 @@ import { Trash2,Clock } from "lucide-react";
 import { Checkbox } from "../ui/checkbox";
 import { toggleDataCheck } from "@/redux/reducer/CounterSlice";
 
-
 const TaskList: React.FC = ()=> {
 
     const datas = useAppSelector((state) => state.data.data);
     const dispatch = useAppDispatch();
 
-    const toggleData = (id: number)=>{
+    const updateData = (id: number,checkValue: boolean) => {
+        const data = {
+            isCheck : checkValue
+        }
+        fetch(`https://newtaskly.onrender.com/task/${id}`,{
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(data => console.log("Data mis à jour correctement",data))
+        .catch(err => console.error("Une erreur s'est produite durant la mise à jour de la data",err))
+    }
+
+    const toggleData = (id: number,onCheck: boolean)=>{
         dispatch(toggleDataCheck(id));
+        updateData(id,onCheck)
+
         console.log("Voici l'id de l'element selectionné : ",id);
     }
 
@@ -23,7 +40,7 @@ const TaskList: React.FC = ()=> {
                 >
                     <div className="flex justify-start gap-0.5 items-center font-josefin md:text-lg text-sm">
                         <Checkbox checked={item.isCheck}
-                            onCheckedChange={()=>{toggleData(item._id)}}
+                            onCheckedChange={()=>{toggleData(item._id,item.isCheck)}}
                         />
                         {
                             item.isCheck ? <div><s>{item.desc}</s></div> : <div>{item.desc}</div>
