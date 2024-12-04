@@ -9,27 +9,28 @@ const TaskList: React.FC = ()=> {
     const datas = useAppSelector((state) => state.data.data);
     const dispatch = useAppDispatch();
 
-    const updateData = (id: number,checkValue: boolean) => {
-        const data = {
-            isCheck : checkValue
-        }
-        fetch(`https://newtaskly.onrender.com/task/${id}`,{
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json' 
-            },
-            body: JSON.stringify(data)
-        })
-        .then(res => res.json())
-        .then(data => console.log("Data mis à jour correctement",data))
-        .catch(err => console.error("Une erreur s'est produite durant la mise à jour de la data",err))
-    }
+    // const updateData = (id: number,checkValue: boolean) => {
+    //     const data = {
+    //         isCheck : checkValue
+    //     }
+    //     fetch(`https://newtaskly.onrender.com/task/${id}`,{
+    //         method: 'PATCH',
+    //         headers: {
+    //             'Content-Type': 'application/json' 
+    //         },
+    //         body: JSON.stringify(data)
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => console.log("Data mis à jour correctement",data))
+    //     .catch(err => console.error("Une erreur s'est produite durant la mise à jour de la data",err))
+    // }
 
-    const toggleData = (id: number,onCheck: boolean)=>{
+    const toggleData = (id: number)=>{
         dispatch(toggleDataCheck(id));
-        updateData(id,onCheck)
+        // updateData(id,onCheck)
 
         console.log("Voici l'id de l'element selectionné : ",id);
+        console.log(datas)
     }
 
     return(
@@ -40,7 +41,7 @@ const TaskList: React.FC = ()=> {
                 >
                     <div className="flex justify-start gap-0.5 items-center font-josefin md:text-lg text-sm">
                         <Checkbox checked={item.isCheck}
-                            onCheckedChange={()=>{toggleData(item._id,item.isCheck)}}
+                            onCheckedChange={()=>{toggleData(item._id)}}
                         />
                         {
                             item.isCheck ? <div><s>{item.desc}</s></div> : <div>{item.desc}</div>

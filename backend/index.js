@@ -34,23 +34,23 @@ app.get("/task", async (req,res) => {
     }
 })
 
-app.patch("/task/:id", async(req,res) => {
-    const { id } = req.params
-    const updateData = req.body
+// app.patch("/task/:id", async(req,res) => {
+//     const { id } = req.params
+//     const updateData = req.body
 
-    try{
-        const data = await model.findByIdAndUpdate(id,updateData,{
-            new: true
-        })
-        console.log(data)
-        res.status(200).json({message: 'Une tache mis à jour ',update: data})
-        res.json(data)
+//     try{
+//         const data = await model.findByIdAndUpdate(id,updateData,{
+//             new: true
+//         })
+//         console.log(data)
+//         res.status(200).json({message: 'Une tache mis à jour ',update: data})
+//         res.json(data)
 
-    }catch(err){
-        console.error("Erreur de mise à jour de la data",err)
-        res.status(400).json({message: 'Erreur lors de la mis à jour ',erreur: err})
-    }
-})
+//     }catch(err){
+//         console.error("Erreur de mise à jour de la data",err)
+//         res.status(400).json({message: 'Erreur lors de la mis à jour ',erreur: err})
+//     }
+// })
 
 app.post("/task", async (req,res) => {
     const { _id,desc,tags,date,isCheck } = req.body
