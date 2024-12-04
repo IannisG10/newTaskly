@@ -10,11 +10,23 @@ const TaskList: React.FC = ()=> {
     const datas = useAppSelector((state) => state.data.data);
     const dispatch = useAppDispatch();
 
-    const handleData = (id: number) => {
+    const handleData = (id: number,check: boolean) => {
         dispatch(toggleData(id));
+        fetch(`https://newtaskly.onrender.com/task/:id`,{
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(check)
+        })
+        .then(res => res.json())
+        .then(dataUpdate => 
+            console.log("Mis à jour réussie",dataUpdate)    
+        ).catch(err => console.error("erreur de modification des données",err))
         console.log(datas)
     }
 
+    
     // const toggleData = (id: number)=>{
     //     dispatch(toggleDataCheck(id));
     //     // updateData(id,onCheck)
@@ -32,7 +44,7 @@ const TaskList: React.FC = ()=> {
                     <div className="flex justify-start gap-0.5 items-center font-josefin md:text-lg text-sm">
                         <Checkbox checked={item.isCheck}
                             onCheckedChange={()=>{
-                                handleData(item._id)
+                                handleData(item._id,item.isCheck)
                             }}
                         />
                         {

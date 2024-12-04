@@ -34,7 +34,23 @@ app.get("/task", async (req,res) => {
     }
 })
 
+app.patch("/task/:id", async (req,res) => {
+    const { id } = req.params
+    const update = req.body
 
+    try {
+        const updateItem = await model.findByIdAndUpdate(id,{isCheck: update},{new: true})
+
+        if(!updateItem){
+            res.status(404).json({error: "Document non trouvé"})
+        }
+
+        res.status(200).json(updateItem)
+    }catch(err){
+        console.error("Erreur lors de la mise à jour :", error);
+        res.status(500).json({ error: "Erreur interne du serveur." });
+    }
+})
 app.post("/task", async (req,res) => {
     const { _id,desc,tags,date,isCheck } = req.body
     //const data = req.body
