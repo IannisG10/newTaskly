@@ -23,7 +23,11 @@ const dataSlice = createSlice({
             state.data = action.payload
         },
         toggleDataCheck: (state,action: PayloadAction<number>) => {
-            state.data.map((item) => item._id === action.payload ? {...item, isCheck: !item.isCheck} : item)
+            // state.data.map((item) => item._id === action.payload ? {...item, isCheck: !item.isCheck} : item)
+            const item = state.data.find(item => item._id === action.payload) 
+            if(item){
+                item.isCheck = !item.isCheck
+            }
         }
     },
 });
