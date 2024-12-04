@@ -9,10 +9,6 @@ import { Calendar } from "../ui/calendar";
 
 const InputField: React.FC = () =>{
 
-    //const input = useAppSelector((state) => state.input.description)
-    //const tag = useAppSelector((state) => state.input.tag)
-    //const dispatch = useAppDispatch()
-
     const [description,setDescription] = useState<string>("")
     const [tag,setTag] = useState<string>("")
     const [showCalendar,setShowCalendar] = useState<boolean>(false)

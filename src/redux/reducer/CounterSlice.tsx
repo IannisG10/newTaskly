@@ -22,15 +22,15 @@ const dataSlice = createSlice({
         setData: (state,action: PayloadAction<any>) => {
             state.data = action.payload
         },
-        toggleDataCheck: (state,action: PayloadAction<number>) => {
-            // state.data.map((item) => item._id === action.payload ? {...item, isCheck: !item.isCheck} : item)
-            const item = state.data.find(item => item._id === action.payload) 
-            if(item){
+        toggleData: (state,action: PayloadAction<number>) => {
+            const item = state.data.find(item => item._id === action.payload)
+            if (item){
                 item.isCheck = !item.isCheck
             }
         }
+        
     },
 });
 
 export default dataSlice.reducer;
-export const { setData,toggleDataCheck } = dataSlice.actions
+export const { setData,toggleData } = dataSlice.actions
