@@ -12,7 +12,7 @@ const TaskList: React.FC = ()=> {
 
     const handleData = (id: number) => {
         dispatch(toggleData(id));
-        fetch(`https://newtaskly.onrender.com/${id}`)
+        fetch(`https://newtaskly.onrender.com/task/${id}`)
         .then(res => res.json())
         .then(data => console.log("There is the data get",data))
         .catch(err=> console.error("Impossible to get data",err))

@@ -47,6 +47,8 @@ app.get("/task/:id",async (req,res) => {
         console.error("Error to get data id",err)
     }
 })
+
+
 app.post("/task", async (req,res) => {
     const { _id,desc,tags,date,isCheck } = req.body
     //const data = req.body
