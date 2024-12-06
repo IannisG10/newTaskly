@@ -35,18 +35,6 @@ app.get("/task", async (req,res) => {
 })
 
 
-app.get("/task/:id",async (req,res) => {
-    const id = req.params.id
-    try{
-        const getData = model.findOne({_id: id})
-        if(!getData){
-            return res.status(404).send("Aucun document trouvé")
-        }
-        res.status(200).json(getData)
-    }catch(err){
-        console.error("Error to get data id",err)
-    }
-})
 
 
 app.post("/task", async (req,res) => {

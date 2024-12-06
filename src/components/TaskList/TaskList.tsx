@@ -10,15 +10,10 @@ const TaskList: React.FC = ()=> {
     const datas = useAppSelector((state) => state.data.data);
     const dispatch = useAppDispatch();
 
-    const handleData = (id: number) => {
-        dispatch(toggleData(id));
-        fetch(`https://newtaskly.onrender.com/task/${id}`)
-        .then(res => res.json())
-        .then(data => console.log("There is the data get",data))
-        .catch(err=> console.error("Impossible to get data",err))
-
-        console.log(datas)
-    }
+    // const handleData = (id: number) => {
+    //     dispatch(toggleData(id));
+        
+    // }
 
     
     // const toggleData = (id: number)=>{
@@ -38,7 +33,7 @@ const TaskList: React.FC = ()=> {
                     <div className="flex justify-start gap-0.5 items-center font-josefin md:text-lg text-sm">
                         <Checkbox checked={item.isCheck}
                             onCheckedChange={()=>{
-                                handleData(item._id)
+                                dispatch(toggleData(item._id))
                             }}
                         />
                         {
