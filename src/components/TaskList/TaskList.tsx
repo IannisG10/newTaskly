@@ -10,11 +10,6 @@ const TaskList: React.FC = ()=> {
     const datas = useAppSelector((state) => state.data.data);
     const dispatch = useAppDispatch();
 
-    // const handleData = (id: number) => {
-    //     dispatch(toggleData(id));
-        
-    // }
-
     const toggleDatCheck = (id: number,checkValue: boolean)=>{
         dispatch(toggleData(id));
         const update = {
@@ -30,6 +25,18 @@ const TaskList: React.FC = ()=> {
         .then(res => res.json())
         .then(data => console.log("Data update succesfully",data))
         .catch(err => console.error("An error occured during the update",err))
+    }
+
+    const deleteData = (id: number)=> {
+        fetch(`https://api-newtaskly.onrender.com/data/${id}`,{
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(data => console.log("Data delet succcesfully",data))
+        .catch(err => console.log("Error",err))
     }
 
     
@@ -60,7 +67,13 @@ const TaskList: React.FC = ()=> {
                             <span><Clock size={20}/></span>
                             <div className="font-semibold">{item.date}</div>
                         </div>
-                        <div className="p-1 hover:bg-gray-200 rounded transition-all duration-200 ease-in-out cursor-pointer">
+                        <div 
+                            onClick={()=>{
+                                deleteData(item._id)
+                            }}
+                            className="p-1 hover:bg-gray-200 rounded transition-all duration-200 ease-in-out 
+                                cursor-pointer">
+
                             <Trash2 size={20}/>
                         </div>
                     </div>
