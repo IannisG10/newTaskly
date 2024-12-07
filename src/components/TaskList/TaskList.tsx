@@ -15,14 +15,25 @@ const TaskList: React.FC = ()=> {
         
     // }
 
-    
-    // const toggleData = (id: number)=>{
-    //     dispatch(toggleDataCheck(id));
-    //     // updateData(id,onCheck)
+    const toggleDatCheck = (id: number,checkValue: boolean)=>{
+        dispatch(toggleData(id));
+        const update = {
+            isCheck: checkValue
+        }
+        fetch(`https://api-newtaskly.onrender.com/data/${id}`,{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(update)
+        })
+        .then(res => res.json())
+        .then(data => console.log("Data update succesfully",data))
+        .catch(err => console.error("An error occured during the update",err))
+    }
 
-    //     console.log("Voici l'id de l'element selectionné : ",id);
-    //     console.log(datas)
-    // }
+    
+    
 
     return(
         <div className="flex flex-col gap-5 md:w-1/4 w-5/6 my-4">
@@ -33,7 +44,7 @@ const TaskList: React.FC = ()=> {
                     <div className="flex justify-start gap-0.5 items-center font-josefin md:text-lg text-sm">
                         <Checkbox checked={item.isCheck}
                             onCheckedChange={()=>{
-                                dispatch(toggleData(item._id))
+                                toggleDatCheck(item._id,item.isCheck)
                             }}
                         />
                         {
