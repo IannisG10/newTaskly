@@ -35,6 +35,7 @@ const InputField: React.FC = () =>{
             setDate(dat)
         }
     }
+    //Create data
 
     const fetchData = ()=>{
         const newTask = {
@@ -60,9 +61,9 @@ const InputField: React.FC = () =>{
     }
 
     
-
+    // Read data
     useEffect(()=>{
-        fetch("https://newtaskly.onrender.com/task")
+        fetch("https://api-newtaskly.onrender.com/data")
         .then(res => res.json())
         .then((data) => {
             console.log("Données reçu de l'API : ",data)
