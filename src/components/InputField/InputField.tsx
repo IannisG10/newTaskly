@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Plus,Search } from "lucide-react";
 import { CalendarDays } from "lucide-react";
 import { Tabs,TabsList,TabsTrigger } from "../ui/tabs";
-import { useAppDispatch,useAppSelector } from "@/redux/hook";
+import { useAppDispatch} from "@/redux/hook";
 import { setData } from "@/redux/reducer/CounterSlice";
 import { Calendar } from "../ui/calendar";
 
@@ -15,7 +15,6 @@ const InputField: React.FC = () =>{
     const [date,setDate] = useState<Date | undefined>(new Date())
     // const [dataTest,setDataTest] = useState<datatype[]>([])
 
-    const datas = useAppSelector((state) => state.data.data)
     const dispatch = useAppDispatch()
 
     
@@ -45,7 +44,7 @@ const InputField: React.FC = () =>{
             date: date?.toLocaleDateString(),
             isCheck: false
         }
-        fetch("https://newtaskly.onrender.com/task",{
+        fetch("https://api-newtaskly.onrender.com/data",{
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -67,10 +66,9 @@ const InputField: React.FC = () =>{
         .then(res => res.json())
         .then((data) => {
             console.log("Données reçu de l'API : ",data)
-            //setDataTest(data)
             dispatch(setData(data))
-            console.log(datas)
-            //console.log(dataTest)
+           
+          
         }).catch((err) => {
             console.error("Erreur de reçeption des données depuis la BD",err)
         })
