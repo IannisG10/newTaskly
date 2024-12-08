@@ -1,3 +1,4 @@
+clean and intuitive task management app.
 [Go to Taskly](https://new-taskly.vercel.app/)
 
 # React + TypeScript + Vite
