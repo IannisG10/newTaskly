@@ -31,7 +31,7 @@ app.post("/data",async (req,res)=>{
         res.status(200).json(saveData) 
         console.log("Data post succesfully")       
     } catch (err) {
-        console.error("Impossible to post data")
+        console.error("Impossible to post data",err)
     }
 })
 

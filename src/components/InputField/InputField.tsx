@@ -44,7 +44,6 @@ const InputField: React.FC = () =>{
             _id: Date.now(),
             desc: description,
             tags: ["tag1","tag2"],
-            tagList: tag.split(","),
             date: date?.toLocaleDateString(),
             isCheck: false
         }
