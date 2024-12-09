@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit/react";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-interface DataType {
+export interface DataType {
     _id: number;
     desc: string;
-    tags: string;
-    date: string;
+    tags: string[];
+    date: string | undefined;
     isCheck: boolean;
 }
 interface DataState {

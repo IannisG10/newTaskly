@@ -7,10 +7,12 @@ import { setData } from "@/redux/reducer/CounterSlice";
 import { Calendar } from "../ui/calendar";
 
 
+
 const InputField: React.FC = () =>{
 
     const [description,setDescription] = useState<string>("")
     const [tag,setTag] = useState<string>("")
+    // const [tagList,setTagList] = useState<string[]>([])
     const [showCalendar,setShowCalendar] = useState<boolean>(false)
     const [date,setDate] = useState<Date | undefined>(new Date())
     // const [dataTest,setDataTest] = useState<datatype[]>([])
@@ -41,7 +43,8 @@ const InputField: React.FC = () =>{
         const newTask = {
             _id: Date.now(),
             desc: description,
-            tags: tag,
+            tags: ["tag1","tag2"],
+            tagList: tag.split(","),
             date: date?.toLocaleDateString(),
             isCheck: false
         }
