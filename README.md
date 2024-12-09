@@ -1,6 +1,8 @@
+clean and intuitive task management app.
 [Go to Taskly](https://new-taskly.vercel.app/)
 
-# React + TypeScript + Vite
+# Deploying on :
+Vercel and Render
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
