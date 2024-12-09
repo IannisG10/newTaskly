@@ -5,7 +5,7 @@ const mongoose = require("mongoose")
 const dataSchema = new mongoose.Schema({
     _id: Number,
     desc: String,
-    tags: String,
+    tags: [String],
     date: String,
     isCheck: Boolean
 })
