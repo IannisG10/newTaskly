@@ -43,7 +43,7 @@ const InputField: React.FC = () =>{
         const newTask = {
             _id: Date.now(),
             desc: description,
-            tags: ["tag1","tag2"],
+            tags: tag.split(","),
             date: date?.toLocaleDateString(),
             isCheck: false
         }
