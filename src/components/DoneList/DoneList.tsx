@@ -8,6 +8,7 @@ const DoneList: React.FC = ()=> {
 
     return(
         <div className="flex flex-col gap-5 md:w-1/4 w-5/6 my-4">
+            
             {Donedata.map((item) => (
                 <div key={item._id}
                      className="flex flex-col border gap-1 relative border-gray-100  p-2 rounded-md shadow"
