@@ -1,5 +1,5 @@
 clean and intuitive task management app.
-[Go to Taskly](https://new-taskly.vercel.app/)
+[Go to Taskly](https://new-taskly-guerras-projects-fd120ac3.vercel.app/)
 
 # Deploying on :
 Vercel and Render
