@@ -14,8 +14,7 @@ const SideBar: React.FC = ()=>{
                         <GalleryVerticalEnd size={20}/> Toutes les tâches
                       </NavLink>
                 </li>
-                <li className="cursor-pointer hover:bg-slate-300 flex flex-row justify-center items-center w-full hover:text-gray-900 
-                    p-1 rounded-sm transition-all duration-200 gap-1">
+                <li className=" w-full  gap-1">
                         <NavLink to="/done" 
                                className={({ isActive }) => (isActive ? "flex flex-row bg-slate-300 p-1 rounded-sm justify-center text-stone-800 font-bold items-center" 
                                : "flex flex-row justify-center items-center p-1 transition-all duration-200 rounded-sm hover:bg-slate-300 hover:text-gray-900")}> 

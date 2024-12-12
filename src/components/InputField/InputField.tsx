@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { Plus,Search } from "lucide-react";
 import { CalendarDays } from "lucide-react";
 import { Tabs,TabsList,TabsTrigger } from "../ui/tabs";
 import { useAppDispatch} from "@/redux/hook";
-import { setData } from "@/redux/reducer/CounterSlice";
+//import { setData } from "@/redux/reducer/CounterSlice";
 import { Calendar } from "../ui/calendar";
+import { saveData } from "@/redux/reducer/CounterSlice";
+import { fetchData } from "@/redux/reducer/CounterSlice";
+
 
 
 
@@ -39,7 +42,7 @@ const InputField: React.FC = () =>{
     }
     //Create data
 
-    const fetchData = ()=>{
+    const fetchDatas = ()=>{
         const newTask = {
             _id: Date.now(),
             desc: description,
@@ -47,35 +50,37 @@ const InputField: React.FC = () =>{
             date: date?.toLocaleDateString(),
             isCheck: false
         }
-        fetch("https://api-newtaskly.onrender.com/data",{
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newTask)
-        }).then(res => res.json())
-        .then(data => console.log("Data from the client : ",data))
-        .catch((err)=>{
-            console.error("Probleme d'envoie de données venant du client",err)
-        })
+        // fetch("https://api-newtaskly.onrender.com/data",{
+        //     method: 'POST',
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify(newTask)
+        // }).then(res => res.json())
+        // .then(data => console.log("Data from the client : ",data))
+        // .catch((err)=>{
+        //     console.error("Probleme d'envoie de données venant du client",err)
+        // })
+        dispatch(saveData(newTask))
+        dispatch(fetchData())
         setDescription("")
         setTag("")
     }
 
     
     // Read data
-    useEffect(()=>{
-        fetch("https://api-newtaskly.onrender.com/data")
-        .then(res => res.json())
-        .then((data) => {
-            console.log("Données reçu de l'API : ",data)
-            dispatch(setData(data))
+    // useEffect(()=>{
+    //     fetch("https://api-newtaskly.onrender.com/data")
+    //     .then(res => res.json())
+    //     .then((data) => {
+    //         console.log("Données reçu de l'API : ",data)
+    //         dispatch(setData(data))
            
           
-        }).catch((err) => {
-            console.error("Erreur de reçeption des données depuis la BD",err)
-        })
-    },[])
+    //     }).catch((err) => {
+    //         console.error("Erreur de reçeption des données depuis la BD",err)
+    //     })
+    // },[])
  
     return (
         <div className="md:w-1/4 w-5/6 flex flex-col justify-center items-center gap-3 relative">
@@ -117,7 +122,7 @@ const InputField: React.FC = () =>{
                    />
             <button className="flex font-josefin justify-center items-center text-white font-medium 
                     border-none bg-zinc-950 w-full rounded-md py-1"  
-                    onClick={fetchData}
+                    onClick={fetchDatas}
             >
                 <Plus/> Ajouter 
             </button>

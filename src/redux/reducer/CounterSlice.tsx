@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit/react";
-//import { createAsyncThunk } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export interface DataType {
     _id: number;
@@ -11,35 +11,65 @@ export interface DataType {
 }
 interface DataState {
     data: DataType[];
+    dataDel: DataType[];
     status: string;
     error: string | null
 }
 
 const initialState: DataState = {
     data: [],
+    dataDel: [],
     status: "idle",
     error: null
 }
-// interface UpdateDatasPayload {
-//     data: boolean;
-//     id: number;
-// }
 
-// const updateDatas = createAsyncThunk<any,UpdateDatasPayload>('data/updateDatas',
-//     async ({data,id},thunkAPI)=>{
-//         const dataToUpdate = {
-//             isCheck: data
-//         }
-//         fetch(`https://api-newtaskly.onrender.com/data/${id}`,{
-//             method: 'PUT',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify(dataToUpdate)
-//         })
-//         .then(res => res.json())
-//         .catch(err => thunkAPI.rejectWithValue(err.message))
-//     })
+export const fetchData = createAsyncThunk(
+    "data/fetchData",
+    async ()=>{
+        try{
+            const response = await fetch("https://api-newtaskly.onrender.com/data")
+            const data = response.json()
+            return data;
+        }catch(err){
+            console.error("Error when reading data",err)
+        }
+    }
+)
+
+export const saveData = createAsyncThunk(
+    "data/saveData",
+    async (data: DataType)=>{
+        const response = await fetch("https://api-newtaskly.onrender.com/data",{
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+        const datas = await response.json()
+
+        return datas
+    }
+)
+
+export const updateData = createAsyncThunk(
+    "data/updateData",
+    async ({id,data}: {id: number, data: any})=>{
+        const response = await fetch(`https://api-newtaskly.onrender.com/data/${id}`,{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        const datas = response.json()
+        return {id,updatedData: datas}
+        
+    }
+)
+
+
 
 
 const dataSlice = createSlice({
@@ -49,6 +79,7 @@ const dataSlice = createSlice({
         setData: (state,action: PayloadAction<any>) => {
             state.data = action.payload
         },
+        //modifie la valeur de isCheck
         toggleData: (state,action: PayloadAction<number>) => {
             const item = state.data.find(item => item._id === action.payload)
             if (item){
@@ -56,16 +87,19 @@ const dataSlice = createSlice({
             }
         }
     },
-    // extraReducers: (builder) => {
-    //     builder
-    //     .addCase(updateDatas.pending, (state) => {
-    //         state.status = "loading"
-    //         state.error = null
-    //     }).addCase(updateDatas.fulfilled, (state,action)=>{
-    //         const item = state.data.find(item => item._id === action.payload.id)
-    //         item.isCheck = !item.isCheck
-    //     })
-    // }
+    extraReducers: (builder)=>{
+        builder.addCase(fetchData.fulfilled,(state,action)=>{
+            state.data = action.payload
+        });
+        builder.addCase(saveData.fulfilled,(state,action)=>{
+            state.data.push(action.payload)
+        });
+        builder.addCase(updateData.fulfilled,(state,action: PayloadAction<{id: number,updatedData: any}>)=>{
+            const item = state.data.findIndex(item => item._id === action.payload.id)
+            state.data[item] = {...state.data[item],...action.payload.updatedData}
+            
+        })
+    }
 });
 
 export default dataSlice.reducer;

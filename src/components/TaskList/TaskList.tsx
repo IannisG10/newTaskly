@@ -4,12 +4,16 @@ import { toggleData } from "@/redux/reducer/CounterSlice";
 import { Trash2,Clock } from "lucide-react";
 import { Checkbox } from "../ui/checkbox";
 import { Calendar } from "../ui/calendar";
+//import { updateData } from "@/redux/reducer/CounterSlice";
+//import { fetchData } from "@/redux/reducer/CounterSlice";
 
 
 const TaskList: React.FC = ()=> {
 
     const datas = useAppSelector((state) => state.data.data);
     const dispatch = useAppDispatch();
+    
+   
 
     const [showCalendar,setShowCalendar] = useState<boolean>(false);
 
@@ -18,7 +22,7 @@ const TaskList: React.FC = ()=> {
     }
 
     const toggleDatCheck = (id: number,checkValue: boolean)=>{
-        dispatch(toggleData(id));
+        dispatch(toggleData(id))
        
 
         const update = {
@@ -34,9 +38,13 @@ const TaskList: React.FC = ()=> {
         .then(res => res.json())
         .then(data => console.log("Data update succesfully",data))
         .catch(err => console.error("An error occured during the update",err))
+        // dispatch(updateData({id: id,data: update}))
+        // dispatch(fetchData())
     }
 
     const deleteData = (id: number)=> {
+        
+        
         fetch(`https://api-newtaskly.onrender.com/data/${id}`,{
             method: 'DELETE',
             headers: {

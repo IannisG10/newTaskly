@@ -1,10 +1,12 @@
 import React from "react";
-import { useAppSelector } from "@/redux/hook";
+import {  useAppSelector } from "@/redux/hook";
 import { Checkbox } from "../ui/checkbox";
 import { Clock,Trash2 } from "lucide-react";
 
+
 const DoneList: React.FC = ()=> {
     const datas = useAppSelector((state) => state.data.data)
+   
     const Donedata = datas.filter(item => item.isCheck)
 
     return(
