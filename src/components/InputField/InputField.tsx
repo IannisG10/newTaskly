@@ -7,20 +7,19 @@ import { useAppDispatch} from "@/redux/hook";
 import { Calendar } from "../ui/calendar";
 import { saveData } from "@/redux/reducer/CounterSlice";
 import { fetchData } from "@/redux/reducer/CounterSlice";
-
-
+import { useAppSelector } from "@/redux/hook";
 
 
 const InputField: React.FC = () =>{
 
     const [description,setDescription] = useState<string>("")
     const [tag,setTag] = useState<string>("")
-    // const [tagList,setTagList] = useState<string[]>([])
     const [showCalendar,setShowCalendar] = useState<boolean>(false)
     const [date,setDate] = useState<Date | undefined>(new Date())
-    // const [dataTest,setDataTest] = useState<datatype[]>([])
 
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
+
+    const theme = useAppSelector((state) => state.theme.theme)
 
     
     const handleDescription = (e: React.ChangeEvent<HTMLInputElement>)=>{
@@ -85,19 +84,19 @@ const InputField: React.FC = () =>{
     return (
         <div className="md:w-1/4 w-5/6 flex flex-col justify-center items-center gap-3 relative">
             <div className="w-full relative">
-                <input type="text" placeholder="Rechercher une tâche..." className="w-full md:text-base text-sm  font-josefin py-1 px-2 border-gray-300 border rounded-md outline-none focus:border-zinc-800" />
-                <Search className="absolute right-1 top-1 cursor-pointer hover:scale-95 transition-all duration-150"/>
+                <input type="text" placeholder="Rechercher une tâche..." className={`w-full md:text-base text-sm  font-josefin py-1 px-2 ${theme ? "border-gray-600 focus:border-zinc-300 bg-slate-400 placeholder-gray-600 text-gray-800":"border-gray-300 focus:border-zinc-800"} border rounded-md outline-none `} />
+                <Search className={`absolute right-1 top-1 cursor-pointer hover:scale-95 transition-all duration-150 ${theme ? "text-gray-100":"text-white"}`}/>
             </div>
             <Tabs className="w-full" defaultValue="toutes">
-                <TabsList className="w-full grid grid-cols-2 shadow-inner h-8 ">
+                <TabsList className={`w-full grid grid-cols-2 shadow-inner h-8 ${theme ? "bg-slate-400 text-gray-700":""}`}>
                     <TabsTrigger value="toutes" className="h-6">Toutes</TabsTrigger>
                     <TabsTrigger value="aujourdhui" className="h-6">Aujourd'hui</TabsTrigger>
                 </TabsList>
             </Tabs>
             <input type="text" 
                    placeholder="Titre de la tâche" 
-                   className="w-full font-josefin py-1 px-2 md:text-base text-sm border-gray-200 border rounded-md 
-                   outline-none focus:border-zinc-800" 
+                   className={`w-full font-josefin py-1 px-2 md:text-base text-sm ${theme ? "border-gray-600 focus:border-zinc-300 bg-slate-400 placeholder-gray-600 text-gray-800":"border-gray-200 focus:border-zinc-800"} border rounded-md 
+                   outline-none `} 
                    value={description}
                    onChange={handleDescription}
                    />
@@ -115,8 +114,8 @@ const InputField: React.FC = () =>{
                       />}
             <input type="text" 
                    placeholder="Tags(Séparés par des virgules)" 
-                   className="w-full font-josefin py-1 px-2 md:text-base text-sm border-gray-200 border rounded-md 
-                   outline-none focus:border-zinc-800" 
+                   className={`w-full font-josefin py-1 px-2 md:text-base text-sm ${theme ? "border-gray-600 focus:border-zinc-300 bg-slate-400 placeholder-gray-600 text-gray-800":"border-gray-200"} border rounded-md 
+                   outline-none focus:border-zinc-800`} 
                    value={tag}
                    onChange={handleTag}
                    />
