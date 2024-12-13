@@ -44,7 +44,7 @@ const TaskList: React.FC = ()=> {
 
     const deleteData = (id: number)=> {
         
-        
+        dispatch(toggleData(id))
         fetch(`https://api-newtaskly.onrender.com/data/${id}`,{
             method: 'DELETE',
             headers: {
