@@ -55,17 +55,19 @@ export const saveData = createAsyncThunk(
 
 export const updateData = createAsyncThunk(
     "data/updateData",
-    async ({id,data}: {id: number, data: any})=>{
+    async ({id,data}: {id: number,data: boolean})=> {
         const response = await fetch(`https://api-newtaskly.onrender.com/data/${id}`,{
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify({
+                isCheck: data
+            })
         })
-        const datas = response.json()
-        return {id,updatedData: datas}
-        
+        const datas = await response.json();
+        // retourne la réponse modifié du serveur
+        return {datas,id};
     }
 )
 
@@ -94,10 +96,11 @@ const dataSlice = createSlice({
         builder.addCase(saveData.fulfilled,(state,action)=>{
             state.data.push(action.payload)
         });
-        builder.addCase(updateData.fulfilled,(state,action: PayloadAction<{id: number,updatedData: any}>)=>{
-            const item = state.data.findIndex(item => item._id === action.payload.id)
-            state.data[item] = {...state.data[item],...action.payload.updatedData}
-            
+        builder.addCase(updateData.fulfilled,(state,action)=>{
+            const index = state.data.findIndex(item => item._id === action.payload.id)
+
+            state.data[index] = action.payload.datas
+            // IMPORTANT : dispatch avec les parametre dans Tasklist
         })
     }
 });

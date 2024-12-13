@@ -4,8 +4,8 @@ import { toggleData } from "@/redux/reducer/CounterSlice";
 import { Trash2,Clock } from "lucide-react";
 import { Checkbox } from "../ui/checkbox";
 import { Calendar } from "../ui/calendar";
-//import { updateData } from "@/redux/reducer/CounterSlice";
-//import { fetchData } from "@/redux/reducer/CounterSlice";
+import { fetchData } from "@/redux/reducer/CounterSlice";
+import { updateData } from "@/redux/reducer/CounterSlice";
 
 
 const TaskList: React.FC = ()=> {
@@ -22,24 +22,25 @@ const TaskList: React.FC = ()=> {
     }
 
     const toggleDatCheck = (id: number,checkValue: boolean)=>{
-        dispatch(toggleData(id))
+
+        dispatch(updateData({id: id,data: checkValue}))
+        // dispatch(toggleData(id))
        
 
-        const update = {
-            isCheck: checkValue
-        }
-        fetch(`https://api-newtaskly.onrender.com/data/${id}`,{
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(update)
-        })
-        .then(res => res.json())
-        .then(data => console.log("Data update succesfully",data))
-        .catch(err => console.error("An error occured during the update",err))
-        // dispatch(updateData({id: id,data: update}))
-        // dispatch(fetchData())
+        // const update = {
+        //     isCheck: checkValue
+        // }
+        // fetch(`https://api-newtaskly.onrender.com/data/${id}`,{
+        //     method: 'PUT',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(update)
+        // })
+        // .then(res => res.json())
+        // .then(data => console.log("Data update succesfully",data))
+        // .catch(err => console.error("An error occured during the update",err))
+        
     }
 
     const deleteData = (id: number)=> {
@@ -54,6 +55,7 @@ const TaskList: React.FC = ()=> {
         .then(res => res.json())
         .then(data => console.log("Data delet succcesfully",data))
         .catch(err => console.log("Error",err))
+        dispatch(fetchData())
     }
 
 
@@ -66,7 +68,7 @@ const TaskList: React.FC = ()=> {
                     <div className="flex justify-start gap-0.5 items-center font-josefin md:text-lg text-sm">
                         <Checkbox checked={item.isCheck}
                             onCheckedChange={()=>{
-                                toggleDatCheck(item._id,item.isCheck)
+                                toggleDatCheck(item._id,!item.isCheck)
                             }}
                         />
                         {
