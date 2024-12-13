@@ -100,15 +100,15 @@ const InputField: React.FC = () =>{
                    value={description}
                    onChange={handleDescription}
                    />
-            <button className="flex font-josefin justify-center md:text-base text-sm items-center font-semibold border-2 border-gray-200 
-                            bg-gray-100 hover:bg-gray-300 transition-all duration-200 ease-in-out rounded-md w-full py-1"
+            <button className={`flex font-josefin justify-center md:text-base text-sm items-center font-semibold border-2 ${theme ? "border-gray-400 bg-gray-500 hover:bg-gray-600 text-slate-200":"border-gray-200 bg-gray-100  hover:bg-gray-300 "}
+                             transition-all duration-200 ease-in-out rounded-md w-full py-1`}
                     onClick={()=>{handleShowCalendar()}}        
             >
                 <CalendarDays/>Date déchéances
             </button>
             {showCalendar && 
             <Calendar mode="single" 
-                      className="absolute top-48 bg-gray-100 rounded"
+                      className={`absolute top-48 ${theme ? "bg-gray-300":"bg-gray-100"} rounded z-30`}
                       selected={date}
                       onSelect={handleChangeDate}
                       />}
@@ -119,8 +119,8 @@ const InputField: React.FC = () =>{
                    value={tag}
                    onChange={handleTag}
                    />
-            <button className="flex font-josefin justify-center items-center text-white font-medium 
-                    border-none bg-zinc-950 w-full rounded-md py-1"  
+            <button className={`flex font-josefin justify-center items-center text-white font-medium 
+                    border-none ${theme ? "bg-zinc-500 text-black":"bg-zinc-950"} w-full rounded-md py-1`}  
                     onClick={fetchDatas}
             >
                 <Plus/> Ajouter 
