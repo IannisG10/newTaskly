@@ -4,6 +4,7 @@ const mongoose = require("mongoose")
 
 const dataModel = require("./models/data")
 const users = require("./models/users")
+
 //Instanciation
 const app = express()
 
@@ -45,8 +46,7 @@ app.post("/signup", async(req,res) => {
 })
 
 app.post("/data",async (req,res)=>{
-    const {_id,desc,tags,date,isCheck} = req.body
-    
+    const {_id,desc,tags,date,isCheck} = req.body    
     try {
         const myData = new dataModel({
             _id: _id,
@@ -115,7 +115,7 @@ app.put("/data/:id", async (req,res) => {
 
 app.delete("/data/:id", async (req,res)=>{
     const id = req.params.id;
-
+    
     try{
         const myData = await dataModel.findByIdAndDelete(id)
         if(!myData){

@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 interface SignupForm {
