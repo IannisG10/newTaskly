@@ -3,6 +3,7 @@ const cors = require('cors')
 const mongoose = require("mongoose")
 
 const dataModel = require("./models/data")
+const users = require("./models/users")
 //Instanciation
 const app = express()
 
@@ -15,6 +16,33 @@ mongoose.connect("mongodb+srv://guerraiannis:newTaskly10@cluster0.ze19o.mongodb.
 }).catch(err => console.error("Error with the connection DB"))
 
 const PORT = 3173
+
+
+//Post the users information
+app.post("/signup", async(req,res) => {
+    const { email,passWord } = req.body
+
+    try{
+        const myUsers = new users({
+            email: email,
+            password: passWord
+        })
+        const saveUsers = await myUsers.save()
+
+        if(!saveUsers){
+            res.status(404).json({message: "Impossible to store user"})
+            console.log("Impossible to store user in DB")
+            return;
+        }
+
+        res.status(200).json(saveUsers)
+        console.log("Users save successfully : ",saveUsers)
+
+    }catch(err){
+        res.status(500).json({message: `Une erreur d'envoie des données utilisateur ${err}`})
+        console.error("Erreur de validation des données utilisateur",err)
+    }
+})
 
 app.post("/data",async (req,res)=>{
     const {_id,desc,tags,date,isCheck} = req.body

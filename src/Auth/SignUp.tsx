@@ -11,7 +11,10 @@ const SignUp: React.FC = ()=> {
 
     const { register,handleSubmit,formState: {errors} } = useForm<SignupForm>()
 
-    const onSubmit: SubmitHandler<SignupForm> = (data) => console.log(data)
+    const onSubmit: SubmitHandler<SignupForm> = (data) => {
+        console.log(data)
+        fetch("https://api-newtaskly.onrender.com/")
+    }
     return(
         <form className="flex flex-col justify-center items-center w-full gap-2"
             onSubmit={handleSubmit(onSubmit)}
