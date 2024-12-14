@@ -1,27 +1,29 @@
 import './App.css'
-import Home from './Layout/Home/Home'
-import Done from './Layout/Done/Done'
-import { Routes,Route } from 'react-router-dom'
-import { useEffect } from 'react'
-import { fetchData } from './redux/reducer/CounterSlice'
-import { useAppDispatch } from './redux/hook'
+// import Home from './Layout/Home/Home'
+// import Done from './Layout/Done/Done'
+// import { Routes,Route } from 'react-router-dom'
+// import { useEffect } from 'react'
+// import { fetchData } from './redux/reducer/CounterSlice'
+// import { useAppDispatch } from './redux/hook'
+import Auth from './Auth/Auth'
 
 
 function App() {
 
-  const dispatch = useAppDispatch()
+  // const dispatch = useAppDispatch()
 
-  useEffect(()=>{
-    dispatch(fetchData())
-  },[])
+  // useEffect(()=>{
+  //   dispatch(fetchData())
+  // },[])
   
 
   return (
     <div >
-      <Routes>
+      {/* <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/done' element={<Done/>}/>
-      </Routes>
+      </Routes> */}
+      <Auth/>
 
     </div>
   )
