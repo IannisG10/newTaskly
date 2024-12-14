@@ -25,7 +25,7 @@ app.post("/signup", async(req,res) => {
     try{
         const myUsers = new users({
             email: email,
-            password: passWord
+            test: passWord
         })
         const saveUsers = await myUsers.save()
 
