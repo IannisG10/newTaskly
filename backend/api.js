@@ -20,11 +20,12 @@ const PORT = 3173
 
 //Post the users information
 app.post("/signup", async(req,res) => {
-    const { email } = req.body
+    const { email,passWord } = req.body
 
     try{
         const myUsers = new users({
-           test: email
+           test: email,
+           mdp: passWord
         })
         const saveUsers = await myUsers.save()
 

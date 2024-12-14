@@ -13,7 +13,15 @@ const SignUp: React.FC = ()=> {
 
     const onSubmit: SubmitHandler<SignupForm> = (data) => {
         console.log(data)
-        fetch("https://api-newtaskly.onrender.com/")
+        fetch("https://api-newtaskly.onrender.com/signup",{
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(res => res.json())
+        .then(d => console.log(d))
+        .catch((err => console.error(err)))
     }
     return(
         <form className="flex flex-col justify-center items-center w-full gap-2"
