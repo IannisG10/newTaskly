@@ -45,7 +45,7 @@ const SignUp: React.FC = ()=> {
                         placeholder="Choisir un mot de passe" 
                         className="border border-gray-200 outline-none focus:border-zinc-950 rounded-md p-1"
                         {...register("passWord",{required: true,pattern: {
-                            value: /[A-Za-Z0-9]/,
+                            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).+$/,
                             message: "Le moit de passe doit commencer par une majuscule"
                         }})}        
                 />
