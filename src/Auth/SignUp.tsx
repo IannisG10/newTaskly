@@ -1,6 +1,7 @@
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
+
 interface SignupForm {
     email: string;
     passWord: string;
@@ -9,7 +10,12 @@ interface SignupForm {
 
 const SignUp: React.FC = ()=> {
 
-    const { register,handleSubmit,formState: {errors} } = useForm<SignupForm>()
+    const { register,resetField,handleSubmit,formState: {errors} } = useForm<SignupForm>({
+        defaultValues:{
+            email: "",
+            passWord: ""
+        }
+    })
 
     const onSubmit: SubmitHandler<SignupForm> = (data) => {
         console.log(data)
@@ -20,11 +26,16 @@ const SignUp: React.FC = ()=> {
             },
             body: JSON.stringify(data)
         }).then(res => res.json())
-        .then(d => 
-            console.log(d)
+        .then((d)=>{
+            alert(d.message)
+        } 
         )
         .catch((err => console.error(err)))
+
+        resetField("email")
+        resetField("passWord")
     }
+
     return(
         <form className="flex flex-col justify-center items-center w-full gap-2"
             onSubmit={handleSubmit(onSubmit)}
