@@ -30,7 +30,7 @@ const SignUp: React.FC = ()=> {
             <div className="flex flex-col justify-start w-3/4">
                 <label htmlFor="" className="flex justify-start text-sm font-semibold">Email</label>    
                 <input type="text" 
-                        placeholder="Ce champ est obligatoire,Entrer votre email" 
+                        placeholder="Entrer votre email" 
                         className="border border-gray-200 outline-none focus:border-zinc-950 rounded-md p-1"
                         {...register("email",{required: "L'email est necessaire",pattern: {
                             value: /^[A-Za-z0-9._-]+@[A-Za-z0-9_-]+\.[A-Za-z{2,}$]/,
@@ -44,9 +44,9 @@ const SignUp: React.FC = ()=> {
                 <input type="password" 
                         placeholder="Choisir un mot de passe" 
                         className="border border-gray-200 outline-none focus:border-zinc-950 rounded-md p-1"
-                        {...register("passWord",{required: true,pattern: {
-                            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).+$/,
-                            message: "Le moit de passe doit commencer par une majuscule"
+                        {...register("passWord",{required: true,minLength:{
+                            value: 8,
+                            message: "Le mot de passe doit contenir au moins 8 caractere"
                         }})}        
                 />
                {errors.passWord && <span className="text-xs text-red-500 ">{errors.passWord.message}</span>}

@@ -24,10 +24,19 @@ app.post("/signup", async(req,res) => {
     const { email,passWord } = req.body
 
     try{
+
+        //Check if the user exist
+        const existingUser = await users.findOne({test: email})
+
+        if(existingUser){
+            return res.send("Cet utilisateur existe deja")
+        }
         const myUsers = new users({
            test: email,
            mdp: passWord
         })
+
+        
         const saveUsers = await myUsers.save()
 
         if(!saveUsers){
