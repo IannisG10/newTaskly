@@ -10,12 +10,14 @@ interface SignupForm {
 
 const SignUp: React.FC = ()=> {
 
-    const { register,resetField,handleSubmit,formState: {errors} } = useForm<SignupForm>({
+    const { register,resetField,handleSubmit,watch,formState: {errors} } = useForm<SignupForm>({
         defaultValues:{
             email: "",
             passWord: ""
         }
     })
+
+    const watchPassword = watch("passWord")
 
     const onSubmit: SubmitHandler<SignupForm> = (data) => {
         console.log(data)
@@ -34,6 +36,7 @@ const SignUp: React.FC = ()=> {
 
         resetField("email")
         resetField("passWord")
+        resetField("confirmPassWord")
     }
 
     return(
@@ -69,10 +72,11 @@ const SignUp: React.FC = ()=> {
                 <input type="password" 
                       placeholder="Confirmer votre mot de passe" 
                       className="border border-gray-200 outline-none focus:border-zinc-950 rounded-md p-1"
-                        {...register("confirmPassWord",{required: "Mot de passe obligatoire"})}  
+                        {...register("confirmPassWord",{required: "La confirmation du mot de passe est nécessaire",validate : value => value === watchPassword || "Le mot de passe ne correspond pas"})}  
                     />
                 
             </div>
+            {errors.confirmPassWord?.message && <span className="text-xs text-red-500">{errors.confirmPassWord.message}</span>}
             <div className="w-full">
                 <button type="submit" className="bg-gray-900 text-white font-medium w-3/4 rounded-md p-1">S'inscrire</button>
             </div>
