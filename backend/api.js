@@ -29,7 +29,7 @@ app.post("/signup", async(req,res) => {
         const existingUser = await users.findOne({test: email})
 
         if(existingUser){
-            return res.send("Cet utilisateur existe deja")
+            return res.send({message: "Cet utilisateur existe deja"})
         }
         const myUsers = new users({
            test: email,
