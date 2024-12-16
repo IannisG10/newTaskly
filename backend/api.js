@@ -30,7 +30,7 @@ app.post("/signup", async(req,res) => {
         const existingUser = await users.findOne({test: email})
 
         if(existingUser){
-            return res.send({message: "Cet utilisateur existe deja"})
+            return res.json({message: "Cet utilisateur existe deja"})
         }
         const hashedPassWord = await bcrypt.hash(passWord,10)
         const myUsers = new users({
@@ -38,7 +38,6 @@ app.post("/signup", async(req,res) => {
            mdp: hashedPassWord
         })
 
-        
         const saveUsers = await myUsers.save()
 
         if(!saveUsers){
@@ -47,7 +46,8 @@ app.post("/signup", async(req,res) => {
             return;
         }
 
-        res.status(200).json(saveUsers)
+        //res.status(200).json(saveUsers)
+        res.json({message: "Utilisateur crée avec succes"})
         console.log("Users save successfully : ",saveUsers)
 
     }catch(err){
