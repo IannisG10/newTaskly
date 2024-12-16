@@ -1,6 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const mongoose = require("mongoose")
+const bcrypt = require("bcrypt")
 
 const dataModel = require("./models/data")
 const users = require("./models/users")
@@ -31,9 +32,10 @@ app.post("/signup", async(req,res) => {
         if(existingUser){
             return res.send({message: "Cet utilisateur existe deja"})
         }
+        const hashedPassWord = await bcrypt.hash(passWord,10)
         const myUsers = new users({
            test: email,
-           mdp: passWord
+           mdp: hashedPassWord
         })
 
         

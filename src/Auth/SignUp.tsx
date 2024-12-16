@@ -20,7 +20,9 @@ const SignUp: React.FC = ()=> {
             },
             body: JSON.stringify(data)
         }).then(res => res.json())
-        .then(d => console.log(d))
+        .then(d => 
+            console.log(d)
+        )
         .catch((err => console.error(err)))
     }
     return(
