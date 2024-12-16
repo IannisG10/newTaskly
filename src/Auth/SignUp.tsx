@@ -20,7 +20,6 @@ const SignUp: React.FC = ()=> {
     const watchPassword = watch("passWord")
 
     const onSubmit: SubmitHandler<SignupForm> = (data) => {
-        console.log(data)
         fetch("https://api-newtaskly.onrender.com/signup",{
             method: 'POST',
             headers:{
