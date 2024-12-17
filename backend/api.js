@@ -21,6 +21,7 @@ const PORT = 3173
 
 
 //Post the users information
+//Signup
 app.post("/signup", async(req,res) => {
     const { email,passWord } = req.body
 
@@ -53,6 +54,29 @@ app.post("/signup", async(req,res) => {
     }catch(err){
         res.status(500).json({message: `Une erreur d'envoie des données utilisateur ${err}`})
         console.error("Erreur de validation des données utilisateur",err)
+    }
+})
+
+//Login users
+app.post("/login",async (req,res)=>{
+    const { email,password } = req.body
+    try{
+        //find the user 
+        const findUser = await users.findOne({test: email})
+        if(!findUser){
+            return res.status(404).json({message: "Cet utilisateur n'esxiste pas"})
+        }
+
+        //Correct or incorect password 
+        const comparePassword = await bcrypt.compare(password,findUser.mdp)
+        if(!comparePassword){
+            return res.status(404).json({message: "Mot de passe incorrect"})
+        }
+
+        // Return the user if the authentiation is great
+        res.json(findUser)
+    }catch(err){
+        
     }
 })
 
