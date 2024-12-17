@@ -75,8 +75,10 @@ app.post("/login",async (req,res)=>{
 
         // Return the user if the authentiation is great
         res.json(findUser)
+        res.json({message: "Utilisateur connectée"})
     }catch(err){
-        
+        console.error("Wronf authentication",err)
+        res.status(500).json(`Erreur de validation des données de l'utilisateur ${err}`)
     }
 })
 

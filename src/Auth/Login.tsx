@@ -19,6 +19,11 @@ const Login: React.FC = ()=> {
             },
             body: JSON.stringify(data)
         })
+        .then(res => res.json())
+        .then(d => 
+                alert(d.message)
+        )
+        .catch(err => console.error("Wrond send data",err))
     }
     return(
         <form className="flex flex-col justify-center items-center w-full gap-2"
@@ -34,7 +39,7 @@ const Login: React.FC = ()=> {
             </div>
             <div className="flex flex-col  w-3/4">
                 <label htmlFor="" className="flex justify-start text-sm font-semibold">Mot de passe</label>
-                <input type="text" 
+                <input type="password" 
                         placeholder="Entrer votre mot de passe" 
                         className="border border-gray-200 outline-none focus:border-zinc-950 rounded-md p-1"
                         {...register("password")}
