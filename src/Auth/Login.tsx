@@ -17,11 +17,12 @@ const Login: React.FC = ()=> {
             headers: {
                 'Content-Type': 'application/json'
             },
+            credentials: 'include',
             body: JSON.stringify(data)
         })
         .then(res => res.json())
         .then(d => 
-                alert(d)
+                alert(d.message)
         )
         .catch(err => console.error("Wrond send data",err))
 
