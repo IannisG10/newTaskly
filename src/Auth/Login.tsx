@@ -8,7 +8,7 @@ interface LoginForm{
 
 const Login: React.FC = ()=> {
 
-    const { register,handleSubmit } = useForm<LoginForm>()
+    const { register,handleSubmit,resetField } = useForm<LoginForm>()
 
     //Callback function to submit form 
     const onSubmit: SubmitHandler<LoginForm> = (data)=>{
@@ -24,6 +24,9 @@ const Login: React.FC = ()=> {
                 alert(d.message)
         )
         .catch(err => console.error("Wrond send data",err))
+
+        resetField("email")
+        resetField("password")
     }
     return(
         <form className="flex flex-col justify-center items-center w-full gap-2"
