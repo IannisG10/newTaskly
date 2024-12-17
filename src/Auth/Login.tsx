@@ -21,7 +21,7 @@ const Login: React.FC = ()=> {
         })
         .then(res => res.json())
         .then(d => 
-                alert(d.message)
+                alert(d)
         )
         .catch(err => console.error("Wrond send data",err))
 

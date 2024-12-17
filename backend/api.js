@@ -78,7 +78,14 @@ app.post("/login",async (req,res)=>{
         const token = jwt.sign({id: findUser._id},"secret")
         
         // Return the user if the authentiation is great
-        res.json(token)
+        res.cookie('jwt',token,{
+            httpOnly: true,
+            maxAge: 1000*60*60 // 1 hours
+
+        })
+        res.json({
+            message: "Success"
+        })
     }catch(err){
         console.error("Wronf authentication",err)
         res.status(500).json(`Erreur de validation des données de l'utilisateur ${err}`)
