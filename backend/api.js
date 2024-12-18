@@ -98,7 +98,7 @@ app.post("/login",async (req,res)=>{
     }
 })
 
-app.post("/data",async (req,res)=>{
+app.post("/home",async (req,res)=>{
     const {_id,desc,tags,date,isCheck} = req.body    
     try {
         const myData = new dataModel({
@@ -123,7 +123,7 @@ app.get("/",(req,res) => {
     })
 })
 //get the data
-app.get("/data",async (req,res) => {
+app.get("/home",async (req,res) => {
     
    try{
         const myData = await dataModel.find({})
@@ -145,7 +145,7 @@ app.get("/data",async (req,res) => {
 // })
 
 // update data
-app.put("/data/:id", async (req,res) => {
+app.put("/home/:id", async (req,res) => {
     const id = req.params.id;
     const updateData = req.body;
 
@@ -166,7 +166,7 @@ app.put("/data/:id", async (req,res) => {
     }
 })
 
-app.delete("/data/:id", async (req,res)=>{
+app.delete("/home/:id", async (req,res)=>{
     const id = req.params.id;
     
     try{
