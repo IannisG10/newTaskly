@@ -24,7 +24,6 @@ function App() {
           <Route path='/' element={<Auth/>}/>
           <Route path='/home' element={<HomeTest/>}/>
       </Routes> 
-      
 
     </div>
   )
