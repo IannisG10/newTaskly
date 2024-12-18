@@ -3,6 +3,8 @@ const cors = require('cors')
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
+const cookieParser = require("cookie-parser")
+
 
 const dataModel = require("./models/data")
 const users = require("./models/users")
@@ -13,9 +15,10 @@ const app = express()
 //Middleware
 app.use(express.json())
 app.use(cors({
-    
     credentials: true,
 }))
+
+app.use(cookieParser())
 
 mongoose.connect("mongodb+srv://guerraiannis:newTaskly10@cluster0.ze19o.mongodb.net/myApiDB?retryWrites=true&w=majority&appName=Cluster0").then(()=>{
     console.log("Connect successfully with the dataBase")
