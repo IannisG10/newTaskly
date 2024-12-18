@@ -14,7 +14,6 @@ const app = express()
 app.use(express.json())
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost:5173/'
 }))
 
 mongoose.connect("mongodb+srv://guerraiannis:newTaskly10@cluster0.ze19o.mongodb.net/myApiDB?retryWrites=true&w=majority&appName=Cluster0").then(()=>{
