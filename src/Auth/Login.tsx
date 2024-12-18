@@ -1,5 +1,6 @@
 import React from "react"
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 interface LoginForm{
     email: string;
@@ -7,6 +8,8 @@ interface LoginForm{
 }
 
 const Login: React.FC = ()=> {
+
+    const navigate = useNavigate();
 
     const { register,handleSubmit,resetField } = useForm<LoginForm>()
 
@@ -20,8 +23,10 @@ const Login: React.FC = ()=> {
             body: JSON.stringify(data)
         })
         .then(res => res.json())
-        .then(d => 
-                alert(d.message)
+        .then(() => {
+                navigate('/home')
+        }
+                
         )
         .catch(err => console.error("Wrond send data",err))
 

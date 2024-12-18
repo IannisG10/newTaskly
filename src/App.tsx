@@ -1,7 +1,7 @@
 import './App.css'
-// import Home from './Layout/Home/Home'
+import Home from './Layout/Home/Home'
 // import Done from './Layout/Done/Done'
-// import { Routes,Route } from 'react-router-dom'
+ import { Routes,Route } from 'react-router-dom'
 // import { useEffect } from 'react'
 // import { fetchData } from './redux/reducer/CounterSlice'
 // import { useAppDispatch } from './redux/hook'
@@ -19,11 +19,11 @@ function App() {
 
   return (
     <div >
-      {/* <Routes>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/done' element={<Done/>}/>
-      </Routes> */}
-      <Auth/>
+       <Routes>
+          <Route path='/' element={<Auth/>}/>
+          <Route path='/home' element={<Home/>}/>
+      </Routes> 
+      
 
     </div>
   )
