@@ -18,7 +18,7 @@ app.use(cors({
     credentials: true,
 }))
 
-app.use(cookieParser())
+//app.use(cookieParser())
 
 mongoose.connect("mongodb+srv://guerraiannis:newTaskly10@cluster0.ze19o.mongodb.net/myApiDB?retryWrites=true&w=majority&appName=Cluster0").then(()=>{
     console.log("Connect successfully with the dataBase")
