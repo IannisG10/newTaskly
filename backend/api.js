@@ -133,16 +133,16 @@ app.get("/data",async (req,res) => {
    }
 })
 
-app.get("/data/:id", async (req,res) => {
-    const { id } = req.params
+// app.get("/data/:id", async (req,res) => {
+//     const { id } = req.params
 
-    try{
-       const myData = await dataModel.findById(id)
-       res.status(200).json(myData)
-    }catch(err){
-        console.error("Error: cannot get the specific data",err)
-    }
-})
+//     try{
+//        const myData = await dataModel.findById(id)
+//        res.status(200).json(myData)
+//     }catch(err){
+//         console.error("Error: cannot get the specific data",err)
+//     }
+// })
 
 // update data
 app.put("/data/:id", async (req,res) => {

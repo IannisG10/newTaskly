@@ -15,8 +15,6 @@ const TaskList: React.FC = ()=> {
 
     const theme = useAppSelector((state)=> state.theme.theme)
     
-   
-
     const [showCalendar,setShowCalendar] = useState<boolean>(false);
 
     const handleVueCalendar = () => {
@@ -27,22 +25,6 @@ const TaskList: React.FC = ()=> {
 
         dispatch(updateData({id: id,data: checkValue}))
         // dispatch(toggleData(id))
-       
-
-        // const update = {
-        //     isCheck: checkValue
-        // }
-        // fetch(`https://api-newtaskly.onrender.com/data/${id}`,{
-        //     method: 'PUT',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(update)
-        // })
-        // .then(res => res.json())
-        // .then(data => console.log("Data update succesfully",data))
-        // .catch(err => console.error("An error occured during the update",err))
-        
     }
 
     const deleteData = (id: number)=> {

@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputField from "@/components/InputField/InputField";
 import NavBar from "@/components/Menu/NavBar";
 import SideBar from "@/components/Menu/SideBar";
 import TaskList from "@/components/TaskList/TaskList";
 import { useAppSelector } from "@/redux/hook";
+import { useAppDispatch } from "@/redux/hook";
+import { fetchData } from "@/redux/reducer/CounterSlice";
 
 const Home: React.FC = () =>{
     const [isOpen,setIsOpen] = useState<boolean>(false)
+
+    const dispatch = useAppDispatch()
+
+    useEffect(()=>{
+        dispatch(fetchData())
+    },[])
 
     const theme = useAppSelector((state)=> state.theme.theme)
     return(
