@@ -23,8 +23,10 @@ const Login: React.FC = ()=> {
             body: JSON.stringify(data)
         })
         .then(res => res.json())
-        .then(() => {
-                navigate('/home')
+        .then((d) => {
+            if (d.message === "Success"){
+                navigate("/homeTest")
+            }
         }
                 
         )

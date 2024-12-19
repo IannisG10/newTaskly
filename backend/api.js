@@ -3,7 +3,6 @@ const cors = require('cors')
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
-const cookieParser = require("cookie-parser")
 
 
 const dataModel = require("./models/data")
@@ -132,18 +131,6 @@ app.get("/home",async (req,res) => {
         console.log("Error during the recuperation of the data",err)
    }
 })
-
-// app.get("/data/:id", async (req,res) => {
-//     const { id } = req.params
-
-//     try{
-//        const myData = await dataModel.findById(id)
-//        res.status(200).json(myData)
-//     }catch(err){
-//         console.error("Error: cannot get the specific data",err)
-//     }
-// })
-
 // update data
 app.put("/home/:id", async (req,res) => {
     const id = req.params.id;
