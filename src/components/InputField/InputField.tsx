@@ -3,12 +3,10 @@ import { Plus,Search } from "lucide-react";
 import { CalendarDays } from "lucide-react";
 import { Tabs,TabsList,TabsTrigger } from "../ui/tabs";
 import { useAppDispatch} from "@/redux/hook";
-//import { setData } from "@/redux/reducer/CounterSlice";
 import { Calendar } from "../ui/calendar";
-import { saveData } from "@/redux/reducer/CounterSlice";
-import { fetchData } from "@/redux/reducer/CounterSlice";
+import { saveData } from "@/redux/reducer/DataReducer";
+import { fetchData } from "@/redux/reducer/DataReducer";
 import { useAppSelector } from "@/redux/hook";
-
 
 const InputField: React.FC = () =>{
 
@@ -21,7 +19,6 @@ const InputField: React.FC = () =>{
 
     const theme = useAppSelector((state) => state.theme.theme)
 
-    
     const handleDescription = (e: React.ChangeEvent<HTMLInputElement>)=>{
         setDescription(e.target.value)
     }
@@ -40,7 +37,6 @@ const InputField: React.FC = () =>{
         }
     }
     //Create data
-
     const fetchDatas = ()=>{
         const newTask = {
             _id: Date.now(),
@@ -49,37 +45,14 @@ const InputField: React.FC = () =>{
             date: date?.toLocaleDateString(),
             isCheck: false
         }
-        // fetch("https://api-newtaskly.onrender.com/data",{
-        //     method: 'POST',
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify(newTask)
-        // }).then(res => res.json())
-        // .then(data => console.log("Data from the client : ",data))
-        // .catch((err)=>{
-        //     console.error("Probleme d'envoie de données venant du client",err)
-        // })
         dispatch(saveData(newTask))
         dispatch(fetchData())
+
+        //Reset the field description and tag description
         setDescription("")
         setTag("")
     }
 
-    
-    // Read data
-    // useEffect(()=>{
-    //     fetch("https://api-newtaskly.onrender.com/data")
-    //     .then(res => res.json())
-    //     .then((data) => {
-    //         console.log("Données reçu de l'API : ",data)
-    //         dispatch(setData(data))
-           
-          
-    //     }).catch((err) => {
-    //         console.error("Erreur de reçeption des données depuis la BD",err)
-    //     })
-    // },[])
  
     return (
         <div className="md:w-1/4 w-5/6 flex flex-col justify-center items-center gap-3 relative">

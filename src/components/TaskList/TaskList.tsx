@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useAppSelector,useAppDispatch } from "@/redux/hook";
-import { toggleData } from "@/redux/reducer/CounterSlice";
+import { toggleData } from "@/redux/reducer/DataReducer";
 import { Trash2,Clock } from "lucide-react";
 import { Checkbox } from "../ui/checkbox";
 import { Calendar } from "../ui/calendar";
-import { fetchData } from "@/redux/reducer/CounterSlice";
-import { updateData } from "@/redux/reducer/CounterSlice";
+import { fetchData } from "@/redux/reducer/DataReducer";
+import { updateData } from "@/redux/reducer/DataReducer";
 
 
 const TaskList: React.FC = ()=> {

@@ -11,14 +11,12 @@ export interface DataType {
 }
 interface DataState {
     data: DataType[];
-    dataDel: DataType[];
     status: string;
-    error: string | null
+    error: string | null;
 }
 
 const initialState: DataState = {
     data: [],
-    dataDel: [],
     status: "idle",
     error: null
 }

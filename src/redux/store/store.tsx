@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import DataReducer from '../reducer/CounterSlice'
+import DataReducer from "../reducer/DataReducer";
 import ThemeReducer from '../reducer/ThemeReducer'
 
 //1.Configurer le store qui va contenir l'etat global de l'application

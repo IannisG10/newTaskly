@@ -5,7 +5,7 @@ import SideBar from "@/components/Menu/SideBar";
 import TaskList from "@/components/TaskList/TaskList";
 import { useAppSelector } from "@/redux/hook";
 import { useAppDispatch } from "@/redux/hook";
-import { fetchData } from "@/redux/reducer/CounterSlice";
+import { fetchData } from "@/redux/reducer/DataReducer";
 
 const Home: React.FC = () =>{
     const [isOpen,setIsOpen] = useState<boolean>(false)
