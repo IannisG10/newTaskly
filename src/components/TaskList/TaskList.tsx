@@ -24,7 +24,7 @@ const TaskList: React.FC = ()=> {
     const toggleDatCheck = (id: number,checkValue: boolean)=>{
 
         dispatch(updateData({id: id,data: checkValue}))
-        // dispatch(toggleData(id))
+        
     }
 
     const deleteData = (id: number)=> {

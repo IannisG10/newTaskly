@@ -26,7 +26,7 @@ export const fetchData = createAsyncThunk(
     async ()=>{
         try{
             const response = await fetch("https://api-newtaskly.onrender.com/home")
-            const data = response.json()
+            const data = await response.json()
             return data;
         }catch(err){
             console.error("Error when reading data",err)

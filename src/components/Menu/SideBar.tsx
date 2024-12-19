@@ -3,6 +3,7 @@ import { GalleryVerticalEnd,ListChecks,Trash } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch,useAppSelector } from "@/redux/hook";
 import { setTheme } from "@/redux/reducer/ThemeReducer";
+import Switch from "../Switch/switch";
 
 const SideBar: React.FC = ()=>{
 
@@ -38,10 +39,7 @@ const SideBar: React.FC = ()=>{
                         <Trash size={20}/>Tâches supprimées
                 </li>
             </ul>
-
-            <button className="border-2 border-black shadow-inner w-1/2 rounded hover:bg-gray-400"
-                    onClick={handleTheme}
-            >Theme</button>
+            <Switch/>
         </div>
     )
 }

@@ -11,15 +11,14 @@ import Auth from './Auth/Auth'
 
 function App() {
 
-  // const dispatch = useAppDispatch()
 
   
 
   return (
     <div >
        <Routes>
-          <Route path='/' element={<Auth/>}/>
-          <Route path='/homeTest' element={<HomeTest/>}/>
+          <Route path='/login' element={<Auth/>}/>
+          <Route path='/' element={<HomeTest/>}/>
       </Routes> 
 
     </div>

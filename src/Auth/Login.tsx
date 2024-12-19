@@ -25,7 +25,7 @@ const Login: React.FC = ()=> {
         .then(res => res.json())
         .then((d) => {
             if (d.message === "Success"){
-                navigate("/homeTest")
+                navigate("/")
             }
         }
                 
