@@ -25,7 +25,7 @@ mongoose.connect("mongodb+srv://guerraiannis:newTaskly10@cluster0.ze19o.mongodb.
     console.log("Connect successfully with the dataBase")
 }).catch(err => console.error("Error with the connection DB"))
 
-const PORT = 3173
+const PORT = 3170
 
 
 //Post the users information
