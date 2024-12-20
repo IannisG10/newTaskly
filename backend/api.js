@@ -3,6 +3,7 @@ const cors = require('cors')
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
+const cookieParser = require("cookie-parser")
 
 
 const dataModel = require("./models/data")
@@ -16,6 +17,7 @@ app.use(express.json())
 app.use(cors({
     credentials: true,
 }))
+app.use(cookieParser())
 
 //app.use(cookieParser())
 
@@ -80,7 +82,7 @@ app.post("/login",async (req,res)=>{
         }
         
         //Generate a token
-        const token = jwt.sign({id: findUser._id},"secret")
+        const token = jwt.sign({id: findUser._id},"secret",{ expiresIn: '1h' })
         
         // Return the user if the authentiation is great
         res.cookie('jwt',token,{

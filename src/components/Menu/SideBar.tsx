@@ -1,22 +1,17 @@
 import React from "react";
-import { GalleryVerticalEnd,ListChecks,Trash } from "lucide-react";
+import { GalleryVerticalEnd,ListChecks,Trash,LogOut } from "lucide-react";
 import { NavLink } from "react-router-dom";
-import { useAppDispatch,useAppSelector } from "@/redux/hook";
-import { setTheme } from "@/redux/reducer/ThemeReducer";
+import { useAppSelector } from "@/redux/hook";
+
 import Switch from "../Switch/switch";
 
 const SideBar: React.FC = ()=>{
 
-    const dispatch = useAppDispatch()
-
     const theme = useAppSelector((state) => state.theme.theme)
 
-    const handleTheme = () => {
-        dispatch(setTheme())
-
-    }
     return(
         <div className={`flex flex-col justify-center z-30 ${theme ? "bg-gray-600":"bg-gray-200"} absolute font-semibold font-josefin top-10 left-2 h-[370px] md:w-2/12 w-6/12 rounded-sm`}>
+            <Switch/>
             <ul className="flex flex-col justify-around md:text-base text-sm h-1/2 mx-2 items-center">
                 <li className="  w-full  
                       gap-1">
@@ -38,8 +33,11 @@ const SideBar: React.FC = ()=>{
                     p-1 rounded-sm transition-all duration-200 gap-1`}>
                         <Trash size={20}/>Tâches supprimées
                 </li>
+                <li className="hover:text-gray-900 p-1 transition-all duration-200 hover:bg-slate-300 cursor-pointer rounded-sm">
+                    <LogOut size={20}/>
+                </li>
             </ul>
-            <Switch/>
+            
         </div>
     )
 }
