@@ -127,8 +127,8 @@ app.get("/",(req,res) => {
 })
 //get the data
 app.get("/home",async (req,res) => {
-    const token = req.cookies.jwt
-    console.log(token)
+    //const token = req.cookies.jwt
+    //console.log(token)
    try{
         const myData = await dataModel.find({})
         res.status(200).json(myData)
