@@ -100,7 +100,9 @@ app.post("/login",async (req,res)=>{
 })
 
 app.post("/home",async (req,res)=>{
-    const {_id,desc,tags,date,isCheck} = req.body    
+    const {_id,desc,tags,date,isCheck} = req.body 
+    
+
     try {
         const myData = new dataModel({
             _id: _id,
@@ -125,7 +127,8 @@ app.get("/",(req,res) => {
 })
 //get the data
 app.get("/home",async (req,res) => {
-    
+    const token = req.cookies.jwt
+    console.log(token)
    try{
         const myData = await dataModel.find({})
         res.status(200).json(myData)
