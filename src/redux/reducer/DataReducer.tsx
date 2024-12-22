@@ -25,7 +25,7 @@ export const fetchData = createAsyncThunk(
     "data/fetchData",
     async ()=>{
         try{
-            const response = await fetch("https://api-newtaskly.onrender.com/home",{
+            const response = await fetch("https://mytaskly.onrender.com/home",{
                 method: 'GET',
                 credentials: 'include'
             })
@@ -40,7 +40,7 @@ export const fetchData = createAsyncThunk(
 export const saveData = createAsyncThunk(
     "data/saveData",
     async (data: DataType)=>{
-        const response = await fetch("https://api-newtaskly.onrender.com/home",{
+        const response = await fetch("https://mytaskly.onrender.com/home",{
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -57,7 +57,7 @@ export const saveData = createAsyncThunk(
 export const updateData = createAsyncThunk(
     "data/updateData",
     async ({id,data}: {id: number,data: boolean})=> {
-        const response = await fetch(`https://api-newtaskly.onrender.com/home/${id}`,{
+        const response = await fetch(`https://mytaskly.onrender.com/home/${id}`,{
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
