@@ -97,7 +97,7 @@ app.post("/login",async (req,res)=>{
     }
 })
 
-app.post("/home",async (req,res)=>{
+app.post("/task",async (req,res)=>{
     const {_id,desc,tags,date,isCheck} = req.body 
 
     const cookie = req.cookies.jwt
@@ -127,7 +127,7 @@ app.get("/",(req,res) => {
     })
 })
 //get the data
-app.get("/home",async (req,res) => {
+app.get("/task",async (req,res) => {
     //const token = req.cookies.jwt
     //console.log(token)
    try{
@@ -138,7 +138,7 @@ app.get("/home",async (req,res) => {
    }
 })
 // update data
-app.put("/home/:id", async (req,res) => {
+app.put("/task/:id", async (req,res) => {
     const id = req.params.id;
     const updateData = req.body;
 
@@ -159,7 +159,7 @@ app.put("/home/:id", async (req,res) => {
     }
 })
 
-app.delete("/home/:id", async (req,res)=>{
+app.delete("/task/:id", async (req,res)=>{
     const id = req.params.id;
     
     try{
