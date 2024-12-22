@@ -99,6 +99,9 @@ app.post("/login",async (req,res)=>{
 
 app.post("/home",async (req,res)=>{
     const {_id,desc,tags,date,isCheck} = req.body 
+
+    const cookie = req.cookies.jwt
+    console.log(cookie)
     
 
     try {
