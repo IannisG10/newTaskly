@@ -31,7 +31,6 @@ app.post("/signup", async(req,res) => {
     const { email,passWord } = req.body
 
     try{
-
         //Check if the user exist
         const existingUser = await users.findOne({test: email})
 
@@ -96,11 +95,13 @@ app.post("/login",async (req,res)=>{
     }
 })
 
+
+
 app.post("/task",async (req,res)=>{
     const {_id,desc,tags,date,isCheck} = req.body 
 
-    const cookie = req.cookies.jwt
-    console.log(cookie)
+    //const cookie = req.cookies.jwt
+   
     
 
     try {
@@ -127,8 +128,8 @@ app.get("/",(req,res) => {
 })
 //get the data
 app.get("/task",async (req,res) => {
-    //const token = req.cookies.jwt
-    //console.log(token)
+    const token = req.cookies.jwt
+    console.log(token)
    try{
         const myData = await dataModel.find({})
         res.status(200).json(myData)

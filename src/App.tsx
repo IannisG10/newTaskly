@@ -13,8 +13,9 @@ function App() {
   return (
     <div >
        <Routes>
-          <Route path='/auth' element={<Auth/>}/>
+          
           <Route path='/' element={<Home/>}/>
+          <Route path='/login' element={<Auth/>}/>
       </Routes> 
 
     </div>

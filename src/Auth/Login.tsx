@@ -15,7 +15,7 @@ const Login: React.FC = ()=> {
 
     //Callback function to submit form 
     const onSubmit: SubmitHandler<LoginForm> = (data)=>{
-        fetch("https://api-newtaskly.onrender.com/login",{
+        fetch("https://mytaskly.onrender.com/login",{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
