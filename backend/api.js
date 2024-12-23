@@ -101,9 +101,6 @@ app.post("/task",async (req,res)=>{
     const {_id,desc,tags,date,isCheck} = req.body 
 
     //const cookie = req.cookies.jwt
-   
-    
-
     try {
         const myData = new dataModel({
             _id: _id,
@@ -126,10 +123,10 @@ app.get("/",(req,res) => {
         lastname: "Iannis"
     })
 })
+
 //get the data
 app.get("/task",async (req,res) => {
-    const token = req.cookies.jwt
-    console.log(token)
+    console.log("Les cookies : ",req.cookies)
    try{
         const myData = await dataModel.find({})
         res.status(200).json(myData)
