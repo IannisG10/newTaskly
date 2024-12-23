@@ -128,7 +128,7 @@ app.get("/",(req,res) => {
 
 //get the data
 app.get("/task",async (req,res) => {
-    console.log("Les cookies : ",req.cookies)
+    // console.log("Les cookies : ",req.cookies)
    try{
         const myData = await dataModel.find({})
         res.cookie("hello","world",{maxAge: 60000})
