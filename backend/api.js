@@ -131,7 +131,7 @@ app.get("/task",async (req,res) => {
     // console.log("Les cookies : ",req.cookies)
    try{
         const myData = await dataModel.find({})
-        res.cookie("hello","world",{maxAge: 60000})
+        console.log(req.headers.cookie)
         res.status(200).json(myData)
    }catch(err){
         console.log("Error during the recuperation of the data",err)
