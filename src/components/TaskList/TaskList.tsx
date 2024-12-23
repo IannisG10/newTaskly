@@ -29,22 +29,9 @@ const TaskList: React.FC = ()=> {
     }
 
     const deleteData = (id: number)=> {
-        // fetch(`https://mytaskly.onrender.com/task/${id}`,{
-        //     method: 'DELETE',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // })
-        // .then(res => res.json())
-        // .then(data => console.log("Data delet succcesfully",data))
-        // .catch(err => console.log("Error",err))
-        // //dispatch(deleteData(id))
         dispatch(DataDel(id))
-        dispatch(fetchData())
-        
-        
+        dispatch(fetchData())  
     }
-
 
     return(
         <div className="flex flex-col gap-5 md:w-1/4 w-5/6 my-4">
@@ -60,7 +47,7 @@ const TaskList: React.FC = ()=> {
                             
                         />
                         {
-                            item.isCheck ? <div className={`${theme ? "text-gray-100":""}`}><s>{item.desc}</s></div> : <div  className={`${theme ? "text-gray-100":""}`}>{item.desc}</div>
+                            item.isCheck ? <div className={`${theme && "text-gray-100"}`}><s>{item.desc}</s></div> : <div  className={`${theme ? "text-gray-100":""}`}>{item.desc}</div>
                         }  
                     </div>
                     <div className="flex flex-row gap-1">
