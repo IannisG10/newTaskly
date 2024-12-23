@@ -27,7 +27,7 @@ export const fetchData = createAsyncThunk(
         try{
             const response = await fetch("https://mytaskly.onrender.com/task",{
                 method: 'GET',
-                credentials: 'include'
+                //credentials: 'include'
             })
             const data = await response.json()
             return data;
