@@ -83,11 +83,11 @@ app.post("/login",async (req,res)=>{
         const token = jwt.sign({id: findUser._id},"secret",{ expiresIn: '1h' })
         
         // Return the user if the authentiation is great
-        res.cookie('jwt',token,{
-            httpOnly: true,
-            maxAge: 1000*60*60 // 1 hours
+        // res.cookie('jwt',token,{
+        //     httpOnly: true,
+        //     maxAge: 1000*60*60 // 1 hours
 
-        })
+        // })
         res.json({
             message: "Success"
         })
@@ -131,6 +131,7 @@ app.get("/task",async (req,res) => {
     console.log("Les cookies : ",req.cookies)
    try{
         const myData = await dataModel.find({})
+        res.cookie("hello","world",{maxAge: 60000})
         res.status(200).json(myData)
    }catch(err){
         console.log("Error during the recuperation of the data",err)
