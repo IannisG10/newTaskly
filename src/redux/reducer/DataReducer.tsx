@@ -11,14 +11,10 @@ export interface DataType {
 }
 interface DataState {
     data: DataType[];
-    status: string;
-    error: string | null;
 }
 
 const initialState: DataState = {
-    data: [],
-    status: "idle",
-    error: null
+    data: []
 }
 
 export const fetchData = createAsyncThunk(
@@ -72,6 +68,21 @@ export const updateData = createAsyncThunk(
     }
 )
 
+export const DataDel = createAsyncThunk(
+    "data/deleteData",
+    async (id: number) => {
+        const response = await fetch(`https://mytaskly.onrender.com/task/${id}`,{
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+
+        const datas = await response.json()
+        return datas
+    }
+)
+
 
 
 
@@ -102,6 +113,9 @@ const dataSlice = createSlice({
 
             state.data[index] = action.payload.datas
             // IMPORTANT : dispatch avec les parametre dans Tasklist
+        });
+        builder.addCase(DataDel.fulfilled,(state,action)=>{
+            state.data = action.payload
         })
     }
 });

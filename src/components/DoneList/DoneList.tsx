@@ -12,7 +12,7 @@ const DoneList: React.FC = ()=> {
     return(
         <div className="flex flex-col gap-5 md:w-1/4 w-5/6 my-4">
 
-            <h1 className="text-3xl italic font-bold">Tâches supprimées</h1>
+            <h1 className="text-3xl italic font-bold">Tâches Terminées</h1>
             
             {Donedata.map((item) => (
                 <div key={item._id}

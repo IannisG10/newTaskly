@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useAppSelector,useAppDispatch } from "@/redux/hook";
-import { toggleData } from "@/redux/reducer/DataReducer";
+//import { toggleData } from "@/redux/reducer/DataReducer";
 import { Trash2,Clock } from "lucide-react";
 import { Checkbox } from "../ui/checkbox";
 import { Calendar } from "../ui/calendar";
 import { fetchData } from "@/redux/reducer/DataReducer";
 import { updateData } from "@/redux/reducer/DataReducer";
+import { DataDel } from "@/redux/reducer/DataReducer";
 
 
 const TaskList: React.FC = ()=> {
@@ -28,18 +29,20 @@ const TaskList: React.FC = ()=> {
     }
 
     const deleteData = (id: number)=> {
-        
-        dispatch(toggleData(id))
-        fetch(`https://mytaskly.onrender.com/task/${id}`,{
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(res => res.json())
-        .then(data => console.log("Data delet succcesfully",data))
-        .catch(err => console.log("Error",err))
+        // fetch(`https://mytaskly.onrender.com/task/${id}`,{
+        //     method: 'DELETE',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // })
+        // .then(res => res.json())
+        // .then(data => console.log("Data delet succcesfully",data))
+        // .catch(err => console.log("Error",err))
+        // //dispatch(deleteData(id))
+        dispatch(DataDel(id))
         dispatch(fetchData())
+        
+        
     }
 
 
