@@ -7,11 +7,13 @@ import Loader from "../Loader/Loader";
 import { fetchData } from "@/redux/reducer/DataReducer";
 import { updateData } from "@/redux/reducer/DataReducer";
 import { DataDel } from "@/redux/reducer/DataReducer";
+import { trashedData } from "@/redux/reducer/DataReducer";
 
 
 const TaskList: React.FC = ()=> {
 
     const datas = useAppSelector((state) => state.data.data);
+    const trash = useAppSelector((state) => state.data.trash)
     const dispatch = useAppDispatch();
 
     const theme = useAppSelector((state)=> state.theme.theme)
@@ -24,12 +26,13 @@ const TaskList: React.FC = ()=> {
     }
 
     const toggleDatCheck = (id: number,checkValue: boolean)=>{
-
         dispatch(updateData({id: id,data: checkValue}))
         
     }
 
     const deleteData = (id: number)=> {
+        dispatch(trashedData(id))
+        console.log(trash)
         dispatch(DataDel(id))
         dispatch(fetchData())  
     }

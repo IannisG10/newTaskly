@@ -31,7 +31,13 @@ const SideBar: React.FC = ()=>{
                 </li>
                 <li className={`cursor-pointer ${theme ? "hover:bg-slate-500 hover:text-white text-gray-100":"hover:bg-slate-300"} flex flex-row justify-center items-center w-full hover:text-gray-900 
                     p-1 rounded-sm transition-all duration-200 gap-1`}>
-                        <Trash size={20}/>Tâches supprimées
+                        <NavLink to="/trash"
+                                className={({ isActive }) => (isActive ? `flex flex-row ${theme ?"bg-slate-500":"bg-slate-300"} p-1 rounded-sm justify-center ${theme ? "text-gray-100":"text-stone-800"} font-bold items-center` 
+                                : `flex flex-row justify-center items-center p-1 transition-all duration-200 rounded-sm ${theme ? "hover:bg-slate-500 hover:text-white text-gray-100":"hover:bg-slate-300 hover:text-gray-900"}`)}
+                        >
+                            <Trash size={20}/>Tâches supprimées
+
+                        </NavLink>
                 </li>
                 <li className="hover:text-gray-900 p-1 transition-all duration-200 hover:bg-slate-300 cursor-pointer rounded-sm">
                     <LogOut size={20}/>

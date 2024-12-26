@@ -11,12 +11,14 @@ export interface DataType {
 }
 interface DataState {
     data: DataType[];
-    loaders: boolean
+    trash: DataType[];
+    loaders: boolean;
 }
 
 const initialState: DataState = {
     data: [],
-    loaders: false
+    trash: [],
+    loaders: false,
 }
 
 export const fetchData = createAsyncThunk(
@@ -25,7 +27,6 @@ export const fetchData = createAsyncThunk(
         try{
             const response = await fetch("https://mytaskly.onrender.com/task",{
                 method: 'GET',
-                //credentials: 'include'
             })
             const data = await response.json()
             return data;
@@ -101,6 +102,13 @@ const dataSlice = createSlice({
             if (item){
                 item.isCheck = !item.isCheck
             }
+        },
+        trashedData: (state,action: PayloadAction<number>) => {
+            const item = state.data.find(item => item._id === action.payload)
+            if(item){
+                state.trash.push(item)
+                
+            }
         }
     },
     extraReducers: (builder)=>{
@@ -127,4 +135,4 @@ const dataSlice = createSlice({
 });
 
 export default dataSlice.reducer;
-export const { setData,toggleData } = dataSlice.actions
+export const { setData,toggleData,trashedData } = dataSlice.actions
