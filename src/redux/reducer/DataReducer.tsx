@@ -11,10 +11,12 @@ export interface DataType {
 }
 interface DataState {
     data: DataType[];
+    loaders: boolean
 }
 
 const initialState: DataState = {
-    data: []
+    data: [],
+    loaders: false
 }
 
 export const fetchData = createAsyncThunk(
@@ -102,7 +104,11 @@ const dataSlice = createSlice({
         }
     },
     extraReducers: (builder)=>{
+        builder.addCase(fetchData.pending,(state)=>{
+            state.loaders = false
+        })
         builder.addCase(fetchData.fulfilled,(state,action)=>{
+            state.loaders = true
             state.data = action.payload
         });
         builder.addCase(saveData.fulfilled,(state,action)=>{

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useAppSelector,useAppDispatch } from "@/redux/hook";
-//import { toggleData } from "@/redux/reducer/DataReducer";
 import { Trash2,Clock } from "lucide-react";
 import { Checkbox } from "../ui/checkbox";
 import { Calendar } from "../ui/calendar";
+import Loader from "../Loader/Loader";
 import { fetchData } from "@/redux/reducer/DataReducer";
 import { updateData } from "@/redux/reducer/DataReducer";
 import { DataDel } from "@/redux/reducer/DataReducer";
@@ -15,6 +15,7 @@ const TaskList: React.FC = ()=> {
     const dispatch = useAppDispatch();
 
     const theme = useAppSelector((state)=> state.theme.theme)
+    const loaders = useAppSelector((state)=> state.data.loaders)
     
     const [showCalendar,setShowCalendar] = useState<boolean>(false);
 
@@ -31,6 +32,12 @@ const TaskList: React.FC = ()=> {
     const deleteData = (id: number)=> {
         dispatch(DataDel(id))
         dispatch(fetchData())  
+    }
+
+    if(!loaders){
+        return(
+            <Loader/>
+        )
     }
 
     return(
